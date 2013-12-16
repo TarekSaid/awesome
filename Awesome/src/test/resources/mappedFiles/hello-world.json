@@ -1,0 +1,8 @@
+{
+  "name":"HelloWorld",
+  "pomFile": {
+    "groupId":"br.com.tarek",
+    "artifactId":"HelloWorld",
+    "description":"Testing the Generator"
+  }
+}
