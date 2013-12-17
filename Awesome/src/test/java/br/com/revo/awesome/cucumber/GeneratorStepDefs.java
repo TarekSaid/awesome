@@ -36,7 +36,7 @@ public class GeneratorStepDefs extends TestCase {
 	public void that_I_have_parsed(String mappingFile) throws Throwable {
 	    Path mappingPath = Paths.get("src", "test", "resources", "mappedFiles", mappingFile);
 
-	    assertTrue(Files.exists(mappingPath));
+	    assertTrue("Mapped file " + mappingPath.getFileName() + " not found.", Files.exists(mappingPath));
 
 	    try (BufferedReader reader = Files.newBufferedReader(mappingPath, Charset.defaultCharset())) {
 	    	Gson gson = new GsonBuilder().create();
@@ -58,13 +58,14 @@ public class GeneratorStepDefs extends TestCase {
 	@Then("^I should see the following files: \"([^\"]*)\" from the source folder \"([^\"]*)\"$")
 	public void I_should_see_the_following_files_from_the_source_folder(List<String> files, String sourceFolder) throws Throwable {
 	    for (String filePath: files) {
-	    	Path receivedFile = Paths.get(System.getProperty("user.home"), sourceFolder, filePath);
+	    	Path expectedFile = Paths.get("src", "test", "resources", "expectedResults", filePath);
+	    	Path receivedFile = Paths.get(filePath);
 
-	    	assertTrue(Files.exists(receivedFile));
+	    	assertTrue("File " + expectedFile.getFileName() + " not found.", Files.exists(receivedFile));
 
-	    	byte[] receivedFileContents = Files.readAllBytes(receivedFile);
-	    	byte[] expectedFileContents = Files.readAllBytes(Paths.get("src", "test", "resources", "expectedResults", filePath));
-	    	assertEquals(expectedFileContents, receivedFileContents);
+			String actualFileContents = new String(Files.readAllBytes(receivedFile));
+			String expectedFileContents = new String(Files.readAllBytes(expectedFile));
+	    	assertEquals("The file created does not match the expected file.", expectedFileContents, actualFileContents);
 	    }
 	}
 }

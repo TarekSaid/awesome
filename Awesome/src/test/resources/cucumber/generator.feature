@@ -9,5 +9,5 @@ Feature: Default MVC Generator
     Then I should see the following files: <files> from the source folder <folder>
 
     Examples: 
-      | app-mapping        | files           | folder           |
-      | "hello-world.json" | "Hello/pom.xml" | ".java/AWEsome/" |
+      | app-mapping        | files           | folder         |
+      | "hello-world.json" | "HelloWorld/pom.xml" | "git/Awesome/" |
