@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>${pom.groupId}</groupId>
-  <artifactId>${pom.artifactId}</artifactId>
+  <artifactId>${pom.artifactId?lower_case}</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>${pom.artifactId}</name>

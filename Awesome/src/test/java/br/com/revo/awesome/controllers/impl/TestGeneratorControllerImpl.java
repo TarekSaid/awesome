@@ -33,7 +33,7 @@ public class TestGeneratorControllerImpl extends TestCase {
 		generator = new JSFGeneratorController();
 		generator.setServiceFactory(serviceFactory);
 		generator.setExecutor(executor);
-		app = new JSFApp();
+		app = new JSFApp("test");
 
 		Mockito.when(executor.awaitTermination(60, TimeUnit.SECONDS)).thenReturn(true);
 	}
@@ -67,12 +67,12 @@ public class TestGeneratorControllerImpl extends TestCase {
 		Mockito.when(executor.awaitTermination(60, TimeUnit.SECONDS)).thenReturn(false);
 
 		try {
-		generator.create(app);
-		fail();
+			generator.create(app);
+			fail("The generator did not throw an exception when the timeout before shutdown elapsed.");
 		} catch (RuntimeException e) {
 			Mockito.verify(executor).shutdownNow();
 		} catch (Exception e) {
-			fail();
+			fail("The generator threw a different Exception: " + e.getMessage());
 		}
 	}
 
@@ -83,15 +83,15 @@ public class TestGeneratorControllerImpl extends TestCase {
 
 		try {
 			generator.create(app);
-			fail("The generator did not throw an Exception.");
+			fail("The generator did not rethrow the InterruptedException.");
 		} catch (RuntimeException e) {
 			if (!ie.equals(e.getCause())) {
-				fail("Did now rethrow Interrupted Exception.");
+				fail("The generator stopped but did now rethrow Interrupted Exception: " + e.getMessage());
 			}
 
 			Mockito.verify(executor).shutdownNow();
 		} catch (Exception e) {
-			fail("Generator threw a different Exception: " + e.getMessage());
+			fail("The generator threw a different Exception: " + e.getMessage());
 		}
 	}
 

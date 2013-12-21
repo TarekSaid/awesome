@@ -10,4 +10,4 @@ Feature: Default MVC Generator
 
     Examples: 
       | app-mapping        | files           | folder         |
-      | "hello-world.json" | "HelloWorld/pom.xml" | "git/Awesome/" |
+      | "hello-world.json" | "pom.xml, src/main/java/br/com/tarek/helloworld/models/HelloBean.java" | "HelloWorld" |

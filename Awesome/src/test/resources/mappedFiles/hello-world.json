@@ -4,5 +4,17 @@
     "groupId":"br.com.tarek",
     "artifactId":"HelloWorld",
     "description":"Testing the Generator"
-  }
+  },
+  "beans":[
+    {
+      "name":"Hello",
+      "scope":"SESSION",
+      "methods":[
+        {
+          "name":"name",
+          "type":"String"
+        }
+      ]
+    }
+  ]
 }

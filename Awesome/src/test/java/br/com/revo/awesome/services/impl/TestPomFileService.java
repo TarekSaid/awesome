@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import br.com.revo.awesome.models.impl.JSFApp;
@@ -20,22 +21,25 @@ import br.com.revo.awesome.models.impl.PomFile;
 @RunWith(MockitoJUnitRunner.class)
 public class TestPomFileService extends TestCase {
 	private PomFileService pomFileService;
-	@Mock PomFile pomFile;
+	@Mock private JSFApp jsfApp;
+	@Mock private PomFile pomFile;
 
 	@Before
 	public void preparePomFileService() {
-		final JSFApp jsfApp = new JSFApp();
-		jsfApp.setName("test");
-		jsfApp.setPomFile(pomFile);
 		pomFileService = new PomFileService(jsfApp);
 	}
 
 	@Test
 	public void getPathShouldReturnPomFilePath() {
-		Path expectedPath = Paths.get("test", "pom.xml");
-		Path actualPath = pomFileService.getPath();
+		String[] names = {"PomTest", "Test", "App"};
 
-		assertEquals(expectedPath, actualPath);
+		for (String name : names) {
+			Mockito.when(jsfApp.getName()).thenReturn(name);
+			Path expectedPath = Paths.get(name, "pom.xml");
+			Path actualPath = pomFileService.getPath();
+	
+			assertEquals(expectedPath, actualPath);
+		}
 	}
 
 	@Test
@@ -47,9 +51,11 @@ public class TestPomFileService extends TestCase {
 	}
 
 	@Test
-	public void getRootShouldReturnPomFileRoot() {
+	public void getRootShouldReturnPomFile() {
 		Map<String, Object> expectedRoot = new HashMap<>();
 		expectedRoot.put("pom", pomFile);
+
+		Mockito.when(jsfApp.getPomFile()).thenReturn(pomFile);
 
 		Map<String, Object> actualRoot = pomFileService.getRoot();
 
@@ -59,6 +65,7 @@ public class TestPomFileService extends TestCase {
 	@After
 	public void destroyPomFileService() {
 		pomFileService = null;
+		jsfApp = null;
 		pomFile = null;
 	}
 }
