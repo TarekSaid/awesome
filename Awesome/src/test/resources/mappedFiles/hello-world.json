@@ -9,10 +9,10 @@
     {
       "name":"Hello",
       "scope":"SESSION",
-      "methods":[
+      "fields":[
         {
-          "name":"name",
-          "type":"String"
+          "type":"String",
+          "name":"name"
         }
       ]
     }

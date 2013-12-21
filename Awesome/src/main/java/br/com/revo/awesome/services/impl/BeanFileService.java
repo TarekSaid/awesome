@@ -22,7 +22,7 @@ public class BeanFileService extends JSFFileService {
 	@Override
 	public Path getPath() {
 		PomFile pomFile = app.getPomFile();
-		return Paths.get(app.getName(), "src", "main", "java", pomFile.getGroupId(), pomFile.getArtifactId().toLowerCase(), "models", beanFile.getName() + "Bean.java");
+		return Paths.get(app.getName(), "src", "main", "java", pomFile.getGroupId().replaceAll("\\.", "/"), pomFile.getArtifactId().toLowerCase(), "models", beanFile.getName() + "Bean.java");
 	}
 
 	@Override
@@ -34,6 +34,7 @@ public class BeanFileService extends JSFFileService {
 	public Map<String, Object> getRoot() {
 		Map<String, Object> root = new HashMap<>();
 		root.put("bean", beanFile);
+		root.put("pom", app.getPomFile());
 
 		return root;
 	}

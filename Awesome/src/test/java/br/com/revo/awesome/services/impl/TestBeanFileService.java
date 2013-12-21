@@ -73,6 +73,9 @@ public class TestBeanFileService extends TestCase {
 	public void getRootShouldReturnBeanFile() {
 		Map<String, Object> expectedRoot = new HashMap<>();
 		expectedRoot.put("bean", beanFile);
+		expectedRoot.put("pom", pomFile);
+
+		Mockito.when(jsfApp.getPomFile()).thenReturn(pomFile);
 
 		Map<String, Object> actualRoot = beanFileService.getRoot();
 
