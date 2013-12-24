@@ -10,6 +10,7 @@ import br.com.revo.awesome.models.impl.JSFApp;
 import br.com.revo.awesome.services.FileService;
 import br.com.revo.awesome.services.impl.BeanFileService;
 import br.com.revo.awesome.services.impl.PomFileService;
+import br.com.revo.awesome.services.impl.WebFileService;
 
 public class JSFServiceFactory implements ServiceFactory {
 	@Override
@@ -21,6 +22,7 @@ public class JSFServiceFactory implements ServiceFactory {
 		for (BeanFile beanFile : jsfApp.getBeans()) {
 			services.add(new BeanFileService(jsfApp, beanFile));
 		}
+		services.add(new WebFileService(jsfApp));
 
 		return services;
 	}

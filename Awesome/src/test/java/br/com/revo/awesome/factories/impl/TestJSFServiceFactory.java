@@ -19,6 +19,7 @@ import br.com.revo.awesome.models.impl.JSFApp;
 import br.com.revo.awesome.services.FileService;
 import br.com.revo.awesome.services.impl.BeanFileService;
 import br.com.revo.awesome.services.impl.PomFileService;
+import br.com.revo.awesome.services.impl.WebFileService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestJSFServiceFactory extends TestCase {
@@ -36,7 +37,7 @@ public class TestJSFServiceFactory extends TestCase {
 		PomFileService expectedService = new PomFileService(jsfApp);
 		List<? extends FileService> receivedServices = serviceFactory.getServices(jsfApp);
 
-		assertTrue("the list of services received does not contain the PomFileService", receivedServices.contains(expectedService));
+		assertTrue("the list of services received does not contain the PomFileService.", receivedServices.contains(expectedService));
 	}
 
 	@Test
@@ -59,6 +60,14 @@ public class TestJSFServiceFactory extends TestCase {
 			List<? extends FileService> receivedServices = serviceFactory.getServices(jsfApp);
 			assertTrue("The list of services received does not contain all the BeanFileService expected.", receivedServices.containsAll(expectedServices));
 		}
+	}
+
+	@Test
+	public void serviceFactoryShouldReturnWebFileService() {
+		WebFileService expectedService = new WebFileService(jsfApp);
+		List<? extends FileService> receivedServices = serviceFactory.getServices(jsfApp);
+
+		assertTrue("The list of services received does not contain the WebFileService.", receivedServices.contains(expectedService));
 	}
 
 	@After
