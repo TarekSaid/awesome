@@ -1,4 +1,4 @@
-package br.com.revo.awesome.models.impl;
+package br.com.revo.awesome.models.files.impl;
 
 public class PomFile {
 	private String groupId;
@@ -32,9 +32,11 @@ public class PomFile {
 	@Override
 	public int hashCode() {
 		final int prime = 31;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result
 				+ ((artifactId == null) ? 0 : artifactId.hashCode());
+		result = prime * result
+				+ ((description == null) ? 0 : description.hashCode());
 		result = prime * result + ((groupId == null) ? 0 : groupId.hashCode());
 		return result;
 	}
@@ -43,7 +45,7 @@ public class PomFile {
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
+		if (!super.equals(obj))
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
@@ -52,6 +54,11 @@ public class PomFile {
 			if (other.artifactId != null)
 				return false;
 		} else if (!artifactId.equals(other.artifactId))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
 			return false;
 		if (groupId == null) {
 			if (other.groupId != null)

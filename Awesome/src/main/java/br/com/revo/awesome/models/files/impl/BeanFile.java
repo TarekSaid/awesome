@@ -1,26 +1,14 @@
-package br.com.revo.awesome.models.impl;
+package br.com.revo.awesome.models.files.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.revo.awesome.enums.ScopeEnum;
+import br.com.revo.awesome.models.files.FileNameRestriction;
 
-public class BeanFile {
-	private String name;
+public class BeanFile extends FileNameRestriction {
 	private ScopeEnum scope;
-	private List<BeanField> fields;
-
-	public BeanFile(String name, ScopeEnum scope) {
-		this.name = name;
-		this.scope = scope;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
+	private List<BeanField> fields = new ArrayList<>();
 
 	public ScopeEnum getScope() {
 		return scope;

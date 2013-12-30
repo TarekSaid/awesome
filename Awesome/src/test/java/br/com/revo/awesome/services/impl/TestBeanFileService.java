@@ -15,9 +15,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import br.com.revo.awesome.models.impl.BeanFile;
+import br.com.revo.awesome.models.files.impl.BeanFile;
+import br.com.revo.awesome.models.files.impl.PomFile;
 import br.com.revo.awesome.models.impl.JSFApp;
-import br.com.revo.awesome.models.impl.PomFile;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestBeanFileService extends TestCase {
@@ -37,7 +37,7 @@ public class TestBeanFileService extends TestCase {
 		String[] appNames = {"TestWorld", "HelloTest", "ThisIsATest"};
 		String[] paths = {"br/com/test", "com/test", "test"};
 		String[] artifacts = {"Testing", "TeST", "BeanTest", "MyProject"};
-		String[] names = {"BeanTest", "PathTest", "Test", "Model"};
+		String[] fileNames = {"BeanTest", "PathTest", "Test", "Model"};
 
 		for (String appName : appNames) {
 			Mockito.when(jsfApp.getName()).thenReturn(appName);
@@ -48,10 +48,10 @@ public class TestBeanFileService extends TestCase {
 				for (String artifactId : artifacts) {
 					Mockito.when(pomFile.getArtifactId()).thenReturn(artifactId.toLowerCase());
 	
-					for (String name : names) {
-						Mockito.when(beanFile.getName()).thenReturn(name);
+					for (String fileName : fileNames) {
+						Mockito.when(beanFile.getName()).thenReturn(fileName);
 		
-						Path expectedPath = Paths.get(appName, "src", "main", "java", path, artifactId.toLowerCase(), "models", name.concat("Bean.java"));
+						Path expectedPath = Paths.get(appName, "src", "main", "java", path, artifactId.toLowerCase(), "models", fileName.concat("Bean.java"));
 						Path actualPath = beanFileService.getPath();
 		
 						assertEquals("returned path is different from expected.", expectedPath, actualPath);
@@ -70,7 +70,7 @@ public class TestBeanFileService extends TestCase {
 	}
 
 	@Test
-	public void getRootShouldReturnBeanFile() {
+	public void getRootShouldReturnBeanFileAndPomFile() {
 		Map<String, Object> expectedRoot = new HashMap<>();
 		expectedRoot.put("bean", beanFile);
 		expectedRoot.put("pom", pomFile);

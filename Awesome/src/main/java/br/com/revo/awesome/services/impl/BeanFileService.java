@@ -5,9 +5,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import br.com.revo.awesome.models.impl.BeanFile;
+import br.com.revo.awesome.models.files.impl.BeanFile;
+import br.com.revo.awesome.models.files.impl.PomFile;
 import br.com.revo.awesome.models.impl.JSFApp;
-import br.com.revo.awesome.models.impl.PomFile;
 import br.com.revo.awesome.services.JSFFileService;
 
 public class BeanFileService extends JSFFileService {
@@ -22,7 +22,7 @@ public class BeanFileService extends JSFFileService {
 	@Override
 	public Path getPath() {
 		PomFile pomFile = app.getPomFile();
-		return Paths.get(app.getName(), "src", "main", "java", pomFile.getGroupId().replaceAll("\\.", "/"), pomFile.getArtifactId().toLowerCase(), "models", beanFile.getName() + "Bean.java");
+		return Paths.get(app.getName(), "src", "main", "java", pomFile.getGroupId().replaceAll("\\.", System.getProperty("file.separator")), pomFile.getArtifactId().toLowerCase(), "models", beanFile.getName() + "Bean.java");
 	}
 
 	@Override

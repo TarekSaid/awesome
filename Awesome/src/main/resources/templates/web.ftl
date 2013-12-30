@@ -13,6 +13,17 @@
     <param-value>Development</param-value>
   </context-param>
 
+<#if app.views??>
+  <!-- Welcome page -->
+  <welcome-file-list>
+  <#list app.views as view>
+    <#if view.welcomeFile>
+    <welcome-file>faces/${view.name}.xhtml</welcome-file>
+    </#if>
+  </#list>
+  </welcome-file-list>
+</#if>
+
   <!-- JSF mapping -->
   <servlet>
     <servlet-name>Faces Servlet</servlet-name>

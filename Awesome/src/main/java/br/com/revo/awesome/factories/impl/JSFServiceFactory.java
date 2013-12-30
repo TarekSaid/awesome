@@ -5,11 +5,13 @@ import java.util.List;
 
 import br.com.revo.awesome.factories.ServiceFactory;
 import br.com.revo.awesome.models.App;
-import br.com.revo.awesome.models.impl.BeanFile;
+import br.com.revo.awesome.models.files.impl.BeanFile;
+import br.com.revo.awesome.models.files.impl.ViewFile;
 import br.com.revo.awesome.models.impl.JSFApp;
 import br.com.revo.awesome.services.FileService;
 import br.com.revo.awesome.services.impl.BeanFileService;
 import br.com.revo.awesome.services.impl.PomFileService;
+import br.com.revo.awesome.services.impl.ViewFileService;
 import br.com.revo.awesome.services.impl.WebFileService;
 
 public class JSFServiceFactory implements ServiceFactory {
@@ -19,10 +21,16 @@ public class JSFServiceFactory implements ServiceFactory {
 		JSFApp jsfApp = (JSFApp) app;
 
 		services.add(new PomFileService(jsfApp));
+
 		for (BeanFile beanFile : jsfApp.getBeans()) {
 			services.add(new BeanFileService(jsfApp, beanFile));
 		}
+
 		services.add(new WebFileService(jsfApp));
+
+		for (ViewFile viewFile : jsfApp.getViews()) {
+			services.add(new ViewFileService(jsfApp, viewFile));
+		}
 
 		return services;
 	}

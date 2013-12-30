@@ -15,8 +15,8 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import br.com.revo.awesome.models.files.impl.PomFile;
 import br.com.revo.awesome.models.impl.JSFApp;
-import br.com.revo.awesome.models.impl.PomFile;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestPomFileService extends TestCase {

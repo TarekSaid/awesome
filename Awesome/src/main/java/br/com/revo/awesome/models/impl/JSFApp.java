@@ -1,14 +1,18 @@
 package br.com.revo.awesome.models.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import br.com.revo.awesome.models.App;
+import br.com.revo.awesome.models.files.impl.BeanFile;
+import br.com.revo.awesome.models.files.impl.PomFile;
+import br.com.revo.awesome.models.files.impl.ViewFile;
 
 public class JSFApp implements App {
 	private String name;
 	private PomFile pomFile;
-	private List<BeanFile> beans = new ArrayList<>();
+	private Set<BeanFile> beans = new HashSet<>();
+	private Set<ViewFile> views = new HashSet<>();
 
 	public JSFApp(String name) {
 		this.name = name;
@@ -30,12 +34,20 @@ public class JSFApp implements App {
 		this.pomFile = pomFile;
 	}
 
-	public List<BeanFile> getBeans() {
+	public Set<BeanFile> getBeans() {
 		return beans;
 	}
 
-	public void setBeans(List<BeanFile> beans) {
+	public void setBeans(Set<BeanFile> beans) {
 		this.beans = beans;
+	}
+
+	public Set<ViewFile> getViews() {
+		return views;
+	}
+
+	public void setViews(Set<ViewFile> views) {
+		this.views = views;
 	}
 
 	@Override
