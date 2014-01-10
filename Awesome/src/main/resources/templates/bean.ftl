@@ -1,26 +1,29 @@
-package ${pom.groupId}.${pom.artifactId?lower_case}.models;
-
-import java.io.Serializable;
+package controllers;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.${bean.scope.description};
 
 @ManagedBean
 @${bean.scope.description}
-public class ${bean.name}Bean implements Serializable {
-  private static final long serialVersionUID = 1L;
-
+public class ${bean.name}Bean {
 <#list bean.fields as field>
   private ${field.type} ${field.name};
 </#list>
-<#list bean.fields as field>
 
+<#list bean.fields as field>
+  <#if field.value??>
+    <#assign result = field.value>
+  <#else>
+    <#assign result = field.name>
+  </#if>
   public ${field.type} get${field.name?cap_first}() {
-    return ${field.name};
+    return ${result};
   }
+<#if !field.value??>
 
   public void set${field.name?cap_first}(${field.type} ${field.name}) {
     this.${field.name} = ${field.name};
   }
+</#if>
 </#list>
 }

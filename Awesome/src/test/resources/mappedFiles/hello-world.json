@@ -1,6 +1,6 @@
 {
   "name":"HelloWorld",
-  "pomFile": {"groupId":"br.com.tarek", "artifactId":"HelloWorld", "description":"Testing the Generator"},
+  "pomFile": {"groupId":"br.com.tarek", "artifactId":"HelloWorld", "description":"Testing the Generator", "javaVersion":"1.7"},
   "beans":[
     {"name":"Hello", "scope":"SESSION", "fields":[{"type":"String", "name":"name"}]}
   ],

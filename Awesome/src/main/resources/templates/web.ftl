@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+  xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
   xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
-  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-  id="WebApp_ID" version="2.5">
+  http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+  id="WebApp_ID" version="3.0">
 
   <display-name>${app.name}</display-name>
 
@@ -30,10 +30,6 @@
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
-
-  <listener>
-    <listener-class>org.apache.myfaces.webapp.StartupServletContextListener</listener-class>
-  </listener>
 
   <!-- Map these files with JSF -->
   <servlet-mapping>

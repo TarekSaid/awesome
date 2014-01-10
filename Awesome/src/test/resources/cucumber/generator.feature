@@ -9,5 +9,6 @@ Feature: Default MVC Generator
     Then I should see the following files: <files> from the source folder <folder>
 
     Examples: 
-      | app-mapping        | files           | folder         |
-      | "hello-world.json" | "pom.xml, src/main/java/br/com/tarek/helloworld/models/HelloBean.java, src/main/webapp/WEB-INF/web.xml, src/main/webapp/hello.xhtml, src/main/webapp/hello-result.xhtml" | "HelloWorld" |
+      | app-mapping         | files                                                                                                                                                 | folder        |
+      | "simple-hello.json" | "pom.xml, src/main/java/controllers/HelloBean.java, src/main/webapp/WEB-INF/web.xml, src/main/webapp/hello.xhtml"                                     | "simplehello" |
+      | "hello-world.json"  | "pom.xml, src/main/java/controllers/HelloBean.java, src/main/webapp/WEB-INF/web.xml, src/main/webapp/hello.xhtml, src/main/webapp/hello-result.xhtml" | "HelloWorld"  |
