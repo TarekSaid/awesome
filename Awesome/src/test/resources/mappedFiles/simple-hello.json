@@ -5,8 +5,8 @@
     {"name":"Hello", "scope":"VIEW", "fields":[{"type":"String", "name":"hello", "value":"\"Hello World!\""}]}
   ],
   "views":[
-    {"name":"hello", "welcomeFile":true, "content":
-      {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"}, contents: [
+    {"name":"hello", "title":"Simple Hello", "welcomeFile":true, "content":
+      {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"}, "contents": [
         {"name":"h:head","contents":[{"name":"title","value":"Simple Hello"}]},
         {"name":"h:body", "value":"#{helloBean.hello}"}
       ]}

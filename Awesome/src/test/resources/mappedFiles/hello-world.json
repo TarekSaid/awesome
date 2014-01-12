@@ -5,7 +5,7 @@
     {"name":"Hello", "scope":"SESSION", "fields":[{"type":"String", "name":"name"}]}
   ],
   "views":[
-    {"name":"hello", "welcomeFile":true, "content": {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"},
+    {"name":"hello", "title":"Hello World", "welcomeFile":true, "content": {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"},
       "contents":[
         {"name":"h:head","contents":[{"name":"title","value":"Hello World"}]},
         {"name":"h:body","contents":[{"name":"h:form","contents":[
@@ -14,7 +14,7 @@
         ]}
       ]}]
     }},
-    {"name":"hello-result", "content": {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"},
+    {"name":"hello-result", "title":"Hello World", "content": {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"},
       "contents":[
         {"name":"h:head","contents":[{"name":"title","value":"Hello World"}]},
         {"name":"h:body","contents":[{"name":"h4","value":"Hello, #{helloBean.name}"}]}
