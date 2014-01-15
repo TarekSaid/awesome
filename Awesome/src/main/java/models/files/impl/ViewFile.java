@@ -1,18 +1,21 @@
 package models.files.impl;
 
+import java.util.List;
+
 import models.files.FileNameRestriction;
-import models.web.impl.ViewContent;
+import models.web.impl.ViewAction;
 
 public class ViewFile extends FileNameRestriction {
+	private String title;
 	private boolean welcomeFile;
-	private ViewContent content;
+	private List<ViewAction> actions;
 
-	public ViewContent getContent() {
-		return content;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setContent(ViewContent content) {
-		this.content = content;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public boolean isWelcomeFile() {
@@ -21,5 +24,13 @@ public class ViewFile extends FileNameRestriction {
 
 	public void setWelcomeFile(boolean welcomeFile) {
 		this.welcomeFile = welcomeFile;
+	}
+
+	public List<ViewAction> getActions() {
+		return actions;
+	}
+
+	public void setActions(List<ViewAction> actions) {
+		this.actions = actions;
 	}
 }

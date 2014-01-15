@@ -20,19 +20,6 @@
       <artifactId>jsf-impl</artifactId>
       <version>2.2.4</version>
     </dependency>
-<#if pom.dependencies??>
-<#list pom.dependencies as dependency>
-
-    <dependency>
-      <groupId>${dependency.groupId}</groupId>
-      <artifactId>${dependency.artifactId}</artifactId>
-      <version>${dependency.version}</version>
-<#if dependency.scope?? && dependency.scope.description != "compile">
-      <scope>${dependency.scope.description!}</scope>
-</#if>
-    </dependency>
-</#list>
-</#if>
   </dependencies>
 
   <build>

@@ -45,6 +45,15 @@ public class GeneratorStepDefs extends TestCase {
 	    } catch (JsonIOException jio) {
 	    	throw new RuntimeException("I/O exception from reader: " + jio.getMessage(), jio);
 	    }
+
+	    // delete the generated folder if it exists
+	    JSFApp jsfApp = (JSFApp) app;
+	    Path sourceFolder = Paths.get(jsfApp.getName());
+
+	    if (Files.exists(sourceFolder)) {
+		    FileTreeEraser fileTreeEraser = new FileTreeEraser();
+		    Files.walkFileTree(Paths.get(jsfApp.getName()), fileTreeEraser);
+	    }
 	}
 
 	@When("^I generate the app$")
@@ -127,5 +136,25 @@ public class GeneratorStepDefs extends TestCase {
         public FileVisitResult visitFileFailed(Path file, IOException exc) {
         	throw new RuntimeException("could not read path: " + exc.getMessage(), exc);
         }
+	}
+
+	private class FileTreeEraser extends SimpleFileVisitor<Path> {
+		@Override
+		public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+		    Files.delete(file);
+
+		    return FileVisitResult.CONTINUE;
+		}
+
+		@Override
+		public FileVisitResult postVisitDirectory(Path dir, IOException e) throws IOException {
+		    if (e == null) {
+		        Files.delete(dir);
+
+		        return FileVisitResult.CONTINUE;
+		    } else {
+		        throw e;
+		    }
+		}
 	}
 }

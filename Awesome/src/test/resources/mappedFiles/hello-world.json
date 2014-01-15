@@ -5,20 +5,11 @@
     {"name":"Hello", "scope":"SESSION", "fields":[{"type":"String", "name":"name"}]}
   ],
   "views":[
-    {"name":"hello", "title":"Hello World", "welcomeFile":true, "content": {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"},
-      "contents":[
-        {"name":"h:head","contents":[{"name":"title","value":"Hello World"}]},
-        {"name":"h:body","contents":[{"name":"h:form","contents":[
-          {"name":"h:inputText","properties":{"value":"#{helloBean.name}"}},
-          {"name":"h:commandButton","properties":{"value":"ok","action":"hello-result"}}
-        ]}
-      ]}]
-    }},
-    {"name":"hello-result", "title":"Hello World", "content": {"name":"html","properties":{"xmlns":"http://www.w3.org/1999/xhtml","xmlns:h":"http://java.sun.com/jsf/html"},
-      "contents":[
-        {"name":"h:head","contents":[{"name":"title","value":"Hello World"}]},
-        {"name":"h:body","contents":[{"name":"h4","value":"Hello, #{helloBean.name}"}]}
-      ]
-    }}
+    {"name":"hello", "title":"Hello World", "welcomeFile":true, "actions": [
+      {"actionType":"DISPLAY", "value":"Name:"},
+      {"actionType":"ASSIGN", "value":"#{helloBean.name}"},
+      {"actionType":"BUTTON", "value":"hello-result"}
+    ]},
+    {"name":"hello-result", "title":"Hello World", "actions":[{"actionType":"DISPLAY", "value":"Hello, #{helloBean.name}"}]}
   ]
 }

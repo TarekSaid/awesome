@@ -1,14 +1,11 @@
 package models.files.impl;
 
-import java.util.HashSet;
-import java.util.Set;
 
 public class PomFile {
 	private String groupId;
 	private String artifactId;
 	private String description;
 	private String javaVersion;
-	private Set<PomDependency> dependencies = new HashSet<>();
 
 	public String getGroupId() {
 		return groupId;
@@ -40,14 +37,6 @@ public class PomFile {
 
 	public void setJavaVersion(String javaVersion) {
 		this.javaVersion = javaVersion;
-	}
-
-	public Set<PomDependency> getDependencies() {
-		return dependencies;
-	}
-
-	public void setDependencies(Set<PomDependency> dependencies) {
-		this.dependencies = dependencies;
 	}
 
 	@Override

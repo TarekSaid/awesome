@@ -1,5 +1,3 @@
-import models.web.impl.TestViewContent;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -18,8 +16,7 @@ import factories.impl.TestJSFServiceFactory;
 	TestPomFileService.class,
 	TestWebFileService.class,
 	TestBeanFileService.class,
-	TestViewFileService.class,
-	TestViewContent.class
+	TestViewFileService.class
 })
 public class GeneratorTestSuite {
 }
