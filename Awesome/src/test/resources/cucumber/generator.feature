@@ -9,6 +9,6 @@ Feature: Default MVC Generator
     Then I should see the following project: <project>
 
     Examples: 
-      | app-mapping         | project       |
-      | "simple-hello.json" | "simplehello" |
-      | "hello-world.json"  | "HelloWorld"  |
+      | app-mapping          | project       |
+      | "simple-hello.json"  | "simplehello" |
+      | "hello-world.json"   | "HelloWorld"  |

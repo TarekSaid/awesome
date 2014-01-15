@@ -13,12 +13,12 @@
     <param-value>Development</param-value>
   </context-param>
 
-<#if app.views??>
+<#if app.models??>
   <!-- Welcome page -->
   <welcome-file-list>
-  <#list app.views as view>
-    <#if view.welcomeFile>
-    <welcome-file>faces/${view.name}.xhtml</welcome-file>
+  <#list app.models as model>
+    <#if model.mainPage>
+    <welcome-file>faces/${model.name?lower_case}.xhtml</welcome-file>
     </#if>
   </#list>
   </welcome-file-list>

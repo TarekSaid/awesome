@@ -1,28 +1,33 @@
 package models.files.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
 import models.files.FileNameRestriction;
 import enums.BeanScope;
 
 public class BeanFile extends FileNameRestriction {
 	private BeanScope scope;
-	private List<BeanField> fields = new ArrayList<>();
+	private Set<BeanField> fields;
+
+	public BeanFile(String name, BeanScope scope, Set<BeanField> fields) {
+		this.name = name;
+		this.scope = scope;
+		this.fields = fields;
+	}
 
 	public BeanScope getScope() {
 		return scope;
 	}
 
-	public void setScope(BeanScope scope) {
+	public void setScope(final BeanScope scope) {
 		this.scope = scope;
 	}
 
-	public List<BeanField> getFields() {
+	public Set<BeanField> getFields() {
 		return fields;
 	}
 
-	public void setFields(List<BeanField> fields) {
+	public void setFields(final Set<BeanField> fields) {
 		this.fields = fields;
 	}
 }

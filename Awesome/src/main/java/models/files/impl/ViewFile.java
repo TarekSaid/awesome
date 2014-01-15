@@ -10,6 +10,13 @@ public class ViewFile extends FileNameRestriction {
 	private boolean welcomeFile;
 	private List<ViewAction> actions;
 
+	public ViewFile(String name, String title, boolean welcomeFile, List<ViewAction> actions) {
+		this.name = name;
+		this.title = title;
+		this.welcomeFile = welcomeFile;
+		this.actions = actions;
+	}
+
 	public String getTitle() {
 		return title;
 	}
