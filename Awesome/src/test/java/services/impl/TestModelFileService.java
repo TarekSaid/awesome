@@ -25,24 +25,20 @@ public class TestModelFileService extends TestCase {
 
 	@Before
 	public void prepareModelFileService() {
+		Mockito.when(jsfApp.getName()).thenReturn("model-test");
 		modelFileService = new ModelFileService(jsfApp, modelFile);
 	}
 
 	@Test
 	public void getPathShouldReturnModelFilePath() {
-		String[] appNames = {"Test", "Project", "test-project", "crud", "model-test"};
 		String[] modelNames = {"Test", "MyModel", "Model", "AnotherTest"};
 
-		for (String appName: appNames) {
-			Mockito.when(jsfApp.getName()).thenReturn(appName);
+		for (String modelName: modelNames) {
+			Mockito.when(modelFile.getName()).thenReturn(modelName);
+			Path expectedPath = Paths.get("model-test", "src", "main", "java", "models", "impl", modelName + ".java");
+			Path actualPath = modelFileService.getPath();
 
-			for (String modelName: modelNames) {
-				Mockito.when(modelFile.getName()).thenReturn(modelName);
-				Path expectedPath = Paths.get(appName, "src", "main", "java", "models", "impl", modelName + ".java");
-				Path actualPath = modelFileService.getPath();
-
-				assertEquals("received model path does not match the expected." + expectedPath, expectedPath, actualPath);
-			}
+			assertEquals("received model path does not match the expected." + expectedPath, expectedPath, actualPath);
 		}
 	}
 

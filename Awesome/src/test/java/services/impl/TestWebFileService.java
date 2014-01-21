@@ -25,21 +25,16 @@ public class TestWebFileService extends TestCase {
 
 	@Before
 	public void prepareWebFileService() {
+		Mockito.when(jsfApp.getName()).thenReturn("MyApp");
 		webFileService = new WebFileService(jsfApp);
 	}
 
 	@Test
 	public void getPathShouldReturnWebFileFullPath() {
-		String[] appNames = {"WebFileTest", "Web", "HelloTest", "MyProject"};
+		Path expectedPath = Paths.get("MyApp", "src", "main", "webapp", "WEB-INF", "web.xml");
+		Path actualPath = webFileService.getPath();
 
-		for (String app: appNames) {
-			Mockito.when(jsfApp.getName()).thenReturn(app);
-
-			Path expectedPath = Paths.get(app, "src", "main", "webapp", "WEB-INF", "web.xml");
-			Path actualPath = webFileService.getPath();
-
-			assertEquals("The path received does not match the expected path.", expectedPath, actualPath);
-		}
+		assertEquals("The path received does not match the expected path.", expectedPath, actualPath);
 	}
 
 	@Test

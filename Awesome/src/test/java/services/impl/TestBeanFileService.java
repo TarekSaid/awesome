@@ -29,26 +29,22 @@ public class TestBeanFileService extends TestCase {
 
 	@Before
 	public void prepareBeanFileService() {
+		Mockito.when(jsfApp.getName()).thenReturn("BeanAppTest");
 		beanFileService = new BeanFileService(jsfApp, beanFile);
 	}
 
 	@Test
 	public void getPathShouldReturnBeanFileFullPath() {
 		Mockito.when(jsfApp.getPomFile()).thenReturn(pomFile);
-		String[] appNames = {"TestWorld", "HelloTest", "ThisIsATest"};
 		String[] fileNames = {"BeanTest", "PathTest", "Test", "Model"};
 
-		for (String appName : appNames) {
-			Mockito.when(jsfApp.getName()).thenReturn(appName);
+		for (String fileName : fileNames) {
+			Mockito.when(beanFile.getName()).thenReturn(fileName);
 
-			for (String fileName : fileNames) {
-				Mockito.when(beanFile.getName()).thenReturn(fileName);
+			Path expectedPath = Paths.get("BeanAppTest", "src", "main", "java", "controllers", fileName.concat("Bean.java"));
+			Path actualPath = beanFileService.getPath();
 
-				Path expectedPath = Paths.get(appName, "src", "main", "java", "controllers", fileName.concat("Bean.java"));
-				Path actualPath = beanFileService.getPath();
-
-				assertEquals("returned path is different from expected.", expectedPath, actualPath);
-			}
+			assertEquals("returned path is different from expected.", expectedPath, actualPath);
 		}
 	}
 

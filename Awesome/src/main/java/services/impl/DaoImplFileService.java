@@ -18,7 +18,7 @@ public class DaoImplFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return Paths.get(app.getName(), "src", "main", "java", "models", "daos", "impl", daoName + "Dao.java");
+		return JAVA_PATH.resolve(Paths.get("models", "daos", "impl", daoName + "Dao.java"));
 	}
 
 	@Override
@@ -33,5 +33,4 @@ public class DaoImplFileService extends JSFFileService {
 
 		return root;
 	}
-
 }

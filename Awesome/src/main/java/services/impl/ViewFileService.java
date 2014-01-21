@@ -26,7 +26,7 @@ public class ViewFileService extends JSFFileService {
 
 		fileName.append(".xhtml");
 		
-		return Paths.get(app.getName(), "src", "main", "webapp", fileName.toString());
+		return WEBAPP_PATH.resolve(Paths.get(fileName.toString()));
 	}
 
 	@Override

@@ -2,11 +2,9 @@ package services.impl;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
-import services.JSFFileService;
 import models.impl.JSFApp;
+import services.JSFFileService;
 
 public class WebFileService extends JSFFileService {
 	public WebFileService(JSFApp app) {
@@ -15,19 +13,11 @@ public class WebFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return Paths.get(app.getName(), "src", "main", "webapp", "WEB-INF", "web.xml");
+		return WEBAPP_PATH.resolve(Paths.get("WEB-INF", "web.xml"));
 	}
 
 	@Override
 	public String getTemplateName() {
 		return "web.ftl";
-	}
-
-	@Override
-	public Map<String, Object> getRoot() {
-		Map<String, Object> root = new HashMap<>();
-		root.put("app", app);
-
-		return root;
 	}
 }

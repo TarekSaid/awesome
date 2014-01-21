@@ -23,20 +23,16 @@ public class TestDataSourceFileService extends TestCase {
 
 	@Before
 	public void prepareDataSourceFileService() {
+		Mockito.when(jsfApp.getName()).thenReturn("datasource-test");
 		dataSourceFileService = new DataSourceFileService(jsfApp);
 	}
 
 	@Test
 	public void getPathShouldReturnDataSourcePath() {
-		String[] appNames = {"datasource-test", "my-data-test", "tst"};
+		Path expectedPath = Paths.get("datasource-test", "src", "main", "java", "models", "enums", "DataSource.java");
+		Path actualPath = dataSourceFileService.getPath();
 
-		for (String appName : appNames) {
-			Mockito.when(jsfApp.getName()).thenReturn(appName);
-			Path expectedPath = Paths.get(appName, "src", "main", "java", "models", "enums", "DataSource.java");
-			Path actualPath = dataSourceFileService.getPath();
-
-			assertEquals(expectedPath, actualPath);
-		}
+		assertEquals(expectedPath, actualPath);
 	}
 
 	@Test

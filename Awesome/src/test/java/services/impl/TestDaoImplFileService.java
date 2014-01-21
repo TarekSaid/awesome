@@ -24,21 +24,17 @@ public class TestDaoImplFileService extends TestCase {
 
 	@Before
 	public void prepareDaoImplFileService() {
+		Mockito.when(jsfApp.getName()).thenReturn("DaoImplTest");
 		daoName = "Testing";
 		daoImplFileService = new DaoImplFileService(jsfApp, daoName);
 	}
 
 	@Test
 	public void getPathShouldReturnDaoImplPath() {
-		String[] appNames = {"DaoImplTest", "myTest", "DaoImpl"};
+		Path expectedPath = Paths.get("DaoImplTest", "src", "main", "java", "models", "daos", "impl", daoName + "Dao.java");
+		Path actualPath = daoImplFileService.getPath();
 
-		for (String appName : appNames) {
-			Mockito.when(jsfApp.getName()).thenReturn(appName);
-			Path expectedPath = Paths.get(appName, "src", "main", "java", "models", "daos", "impl", daoName + "Dao.java");
-			Path actualPath = daoImplFileService.getPath();
-
-			assertEquals(expectedPath, actualPath);
-		}
+		assertEquals(expectedPath, actualPath);
 	}
 
 	@Test

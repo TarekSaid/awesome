@@ -20,7 +20,7 @@ public class BeanFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return Paths.get(app.getName(), "src", "main", "java", "controllers", beanFile.getName() + "Bean.java");
+		return JAVA_PATH.resolve(Paths.get("controllers", beanFile.getName() + "Bean.java"));
 	}
 
 	@Override

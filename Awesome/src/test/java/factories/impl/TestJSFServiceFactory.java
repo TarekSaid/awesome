@@ -29,6 +29,7 @@ import services.impl.DaoImplFileService;
 import services.impl.DataSourceFileService;
 import services.impl.IdFileService;
 import services.impl.ModelFileService;
+import services.impl.PersistenceFileService;
 import services.impl.PomFileService;
 import services.impl.ViewFileService;
 import services.impl.WebFileService;
@@ -240,9 +241,7 @@ public class TestJSFServiceFactory extends TestCase {
 
 		List<? extends FileService> actualServices = serviceFactory.getServices(jsfApp);
 
-		for (FileService f : actualServices) {
-			assertFalse("an IdFileService was added to the list of services with no persisted models.", f instanceof IdFileService);
-		}
+		assertFalse("an IdFileService was added to the list of services with no persisted models.", actualServices.contains(new IdFileService(jsfApp)));
 	}
 
 	@Test
@@ -280,9 +279,7 @@ public class TestJSFServiceFactory extends TestCase {
 
 		List<? extends FileService> actualServices = serviceFactory.getServices(jsfApp);
 
-		for (FileService f : actualServices) {
-			assertFalse("a DaoFileService was added to the list of services with no persisted models.", f instanceof DaoFileService);
-		}
+		assertFalse("a DaoFileService was added to the list of services with no persisted models.", actualServices.contains(new DaoFileService(jsfApp)));
 	}
 
 	@Test
@@ -320,9 +317,7 @@ public class TestJSFServiceFactory extends TestCase {
 
 		List<? extends FileService> actualServices = serviceFactory.getServices(jsfApp);
 
-		for (FileService f : actualServices) {
-			assertFalse("an AbstractDaoFileService was added to the list of services with no persisted models.", f instanceof AbstractDaoFileService);
-		}
+		assertFalse("an AbstractDaoFileService was added to the list of services with no persisted models.", actualServices.contains(new AbstractDaoFileService(jsfApp)));
 	}
 
 	@Test
@@ -359,9 +354,42 @@ public class TestJSFServiceFactory extends TestCase {
 
 		List<? extends FileService> actualServices = serviceFactory.getServices(jsfApp);
 
-		for (FileService f : actualServices) {
-			assertFalse("a DataSourceFileService was added to the list of services with no persisted models.", f instanceof DataSourceFileService);
+		assertFalse("a DataSourceFileService was added to the list of services with no persisted models.", actualServices.contains(new DataSourceFileService(jsfApp)));
+	}
+
+	@Test
+	public void serviceFactoryShouldReturnPersistenceFileServiceIfThereIsAtLeastOnePersistedModel() {
+		PersistenceFileService expectedService = new PersistenceFileService(jsfApp);
+		Mockito.when(model.getName()).thenReturn("test");
+		Mockito.when(model.isPersisted()).thenReturn(true);
+
+		// creating different sizes of sets of models
+		List<Set<Model>> listOfModels = new ArrayList<>();
+		listOfModels.add(Sets.newSet(model));
+		listOfModels.add(Sets.newSet(model, model, model, model, model));
+		listOfModels.add(Sets.newSet(model, model, model, model, model, model, model, model, model, model));
+
+		for (Set<Model> models : listOfModels) {
+			Mockito.when(jsfApp.getModels()).thenReturn(models);
+
+			List<? extends FileService> actualServices = serviceFactory.getServices(jsfApp);
+
+			assertTrue("the list of services received does not contain the PersistenceFileService.", actualServices.contains(expectedService));
 		}
+	}
+
+	@Test
+	public void serviceFactoryShouldNotReturnPersistenceFileServiceForNonPersistedModel() {
+		Mockito.when(model.getName()).thenReturn("test");
+		Mockito.when(model.isPersisted()).thenReturn(false);
+		Set<Model> models = Sets.newSet(model);
+
+		// returning the set of models
+		Mockito.when(jsfApp.getModels()).thenReturn(models);
+
+		List<? extends FileService> actualServices = serviceFactory.getServices(jsfApp);
+
+		assertFalse("a PersistenceFileService was added to the list of services with no persisted models.", actualServices.contains(new PersistenceFileService(jsfApp)));
 	}
 
 	@After

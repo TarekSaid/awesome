@@ -4,7 +4,11 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.HashMap;
+import java.util.Map;
 
 import models.impl.JSFApp;
 import enums.FreeMarkerConfiguration;
@@ -15,9 +19,15 @@ import freemarker.template.TemplateException;
 public abstract class JSFFileService implements FileService {
 	protected JSFApp app;
 	private Configuration cfg = FreeMarkerConfiguration.INSTANCE.getConfiguration();
+	protected final Path JAVA_PATH;
+	protected final Path WEBAPP_PATH;
+	protected final Path RESOURCES_PATH;
 
 	public JSFFileService(JSFApp app) {
 		this.app = app;
+		JAVA_PATH = Paths.get(app.getName(), "src", "main", "java");
+		WEBAPP_PATH = Paths.get(app.getName(), "src", "main", "webapp");
+		RESOURCES_PATH = Paths.get(app.getName(), "src", "main", "resources");
 	}
 
 	@Override
@@ -42,6 +52,14 @@ public abstract class JSFFileService implements FileService {
 				}
 			}
 		}
+	}
+
+	@Override
+	public Map<String, Object> getRoot() {
+		Map<String, Object> root = new HashMap<>();
+		root.put("app", app);
+
+		return root;
 	}
 
 	public Configuration getCfg() {

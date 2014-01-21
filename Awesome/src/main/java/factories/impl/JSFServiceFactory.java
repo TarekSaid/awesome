@@ -17,6 +17,7 @@ import services.impl.DaoImplFileService;
 import services.impl.DataSourceFileService;
 import services.impl.IdFileService;
 import services.impl.ModelFileService;
+import services.impl.PersistenceFileService;
 import services.impl.PomFileService;
 import services.impl.ViewFileService;
 import services.impl.WebFileService;
@@ -52,6 +53,7 @@ public class JSFServiceFactory implements ServiceFactory {
 			services.add(new DaoFileService(jsfApp));
 			services.add(new AbstractDaoFileService(jsfApp));
 			services.add(new DataSourceFileService(jsfApp));
+			services.add(new PersistenceFileService(jsfApp));
 		}
 
 		services.add(new PomFileService(jsfApp));

@@ -19,7 +19,7 @@ public class ModelFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return Paths.get(app.getName(), "src", "main", "java", "models", "impl", modelFile.getName() + ".java");
+		return JAVA_PATH.resolve(Paths.get("models", "impl", modelFile.getName() + ".java"));
 	}
 
 	@Override

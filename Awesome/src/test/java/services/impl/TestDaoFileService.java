@@ -23,21 +23,16 @@ public class TestDaoFileService extends TestCase {
 
 	@Before
 	public void prepareDaoFileService() {
+		Mockito.when(jsfApp.getName()).thenReturn("CrudTest");
 		daoFileService = new DaoFileService(jsfApp);
 	}
 
 	@Test
 	public void getPathShouldReturnDaoPath() {
-		String[] appNames = {"myApp", "testing", "crud-app"};
+		Path expectedPath = Paths.get("CrudTest", "src", "main", "java", "models", "daos", "Dao.java");
+		Path actualPath = daoFileService.getPath();
 
-		for (String appName : appNames) {
-			Mockito.when(jsfApp.getName()).thenReturn(appName);
-
-			Path expectedPath = Paths.get(appName, "src", "main", "java", "models", "daos", "Dao.java");
-			Path actualPath = daoFileService.getPath();
-
-			assertEquals(expectedPath, actualPath);
-		}
+		assertEquals(expectedPath, actualPath);
 	}
 
 	@Test

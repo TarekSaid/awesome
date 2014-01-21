@@ -23,21 +23,16 @@ public class TestIdFileService extends TestCase {
 
 	@Before
 	public void prepareIdFileService() {
+		Mockito.when(jsfApp.getName()).thenReturn("persistedTest");
 		idFileService = new IdFileService(jsfApp);
 	}
 
 	@Test
 	public void getPathShouldReturnIdPath() {
-		String[] appNames = {"persistedTest", "apptest", "crud-test", "id-test"};
+		Path expectedPath = Paths.get("persistedTest", "src", "main", "java", "models", "Identifiable.java");
+		Path actualPath = idFileService.getPath();
 
-		for (String appName : appNames) {
-			Mockito.when(jsfApp.getName()).thenReturn(appName);
-
-			Path expectedPath = Paths.get(appName, "src", "main", "java", "models", "Identifiable.java");
-			Path actualPath = idFileService.getPath();
-
-			assertEquals(expectedPath, actualPath);
-		}
+		assertEquals(expectedPath, actualPath);
 	}
 
 	@Test
