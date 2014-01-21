@@ -13,15 +13,12 @@
   <#list view.actions as action>
     <#if action.actionType == "BUTTON" || action.actionType == "LINK">
       <#assign hasForm = true>
-    <#elseif action.actionType == "CRUD">
-      <#assign hasCrud = true>
     </#if>
   </#list>
 </#if>
 <#if hasForm>
   <#assign indent="  ">
   <#include "views/form.ftl">
-<#elseif hasCrud>
 <#else>
   <#include "views/components.ftl">
 </#if>

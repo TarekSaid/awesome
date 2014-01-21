@@ -31,7 +31,8 @@ public class TestViewFileService extends TestCase {
 	}
 
 	@Test
-	public void getPathShouldReturnViewServiceFullPath() {
+	public void getPathShouldReturnViewNameWhenNotCrud() {
+		Mockito.when(viewFile.isCrud()).thenReturn(false);
 		String[] appNames = {"Tst", "App", "MyApp", "HelloWorld"};
 		String[] fileNames = {"hello", "test", "my-view", "my-file", "view"};
 
@@ -50,8 +51,38 @@ public class TestViewFileService extends TestCase {
 	}
 
 	@Test
-	public void getTemplateNameShouldReturnViewFileTemplateName() {
+	public void getPathShouldReturnPluralViewNameForCrud() {
+		Mockito.when(viewFile.isCrud()).thenReturn(true);
+		String[] appNames = {"Crud", "PersistedApp", "CrudTest", "Persistence", "ContactList"};
+		String[] modelNames = {"person", "contact", "phone", "crud"};
+
+		for (String appName : appNames) {
+			Mockito.when(jsfApp.getName()).thenReturn(appName);
+
+			for (String modelName : modelNames) {
+				Mockito.when(viewFile.getName()).thenReturn(modelName);
+
+				Path expectedPath = Paths.get(appName, "src", "main", "webapp", modelName.concat("s.xhtml"));
+				Path actualPath = viewFileService.getPath();
+
+				assertEquals("returned path is different from expected.", expectedPath, actualPath);
+			}
+		}
+	}
+
+	@Test
+	public void getTemplateNameShouldReturnViewTemplateWhenNotCrud() {
+		Mockito.when(viewFile.isCrud()).thenReturn(false);
 		String expectedTemplate = "view.ftl";
+		String actualTemplate = viewFileService.getTemplateName();
+
+		assertEquals(expectedTemplate, actualTemplate);
+	}
+
+	@Test
+	public void getTemplateNameShouldReturnCrudTemplateForCrud() {
+		Mockito.when(viewFile.isCrud()).thenReturn(true);
+		String expectedTemplate = "crud.ftl";
 		String actualTemplate = viewFileService.getTemplateName();
 
 		assertEquals(expectedTemplate, actualTemplate);

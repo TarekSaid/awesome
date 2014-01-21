@@ -13,57 +13,57 @@ import models.impl.Person;
 @ManagedBean
 @ViewScoped
 public class PersonBean implements Serializable {
-	private static final long serialVersionUID = 1L;
-	private List<Person> persons;
-	private Person person;
-	private PersonDao personDao;
+  private static final long serialVersionUID = 1L;
+  private List<Person> persons;
+  private Person person;
+  private PersonDao personDao;
 
-	public PersonBean() {
-		personDao = new PersonDao();
-		init();
-	}
+  public PersonBean() {
+    personDao = new PersonDao();
+    init();
+  }
 
-	public void addPerson(ActionEvent event) {
-		personDao.create(person);
-		init();
-	}
+  public void addPerson(ActionEvent event) {
+    personDao.create(person);
+    init();
+  }
 
-	public void editPerson(ActionEvent event) {
-		personDao.update(person);
-		init();
-	}
+  public void editPerson(ActionEvent event) {
+    personDao.update(person);
+    init();
+  }
 
-	public void deletePerson(ActionEvent event) {
-		personDao.delete(person);
-		init();
-	}
+  public void deletePerson(ActionEvent event) {
+    personDao.delete(person);
+    init();
+  }
 
-	public List<Person> getPersons() {
-		return persons;
-	}
+  public List<Person> getPersons() {
+    return persons;
+  }
 
-	public void setPersons(List<Person> persons) {
-		this.persons = persons;
-	}
+  public void setPersons(List<Person> persons) {
+    this.persons = persons;
+  }
 
-	public Person getPerson() {
-		return person;
-	}
+  public Person getPerson() {
+    return person;
+  }
 
-	public void setPerson(Person person) {
-		this.person = person;
-	}
+  public void setPerson(Person person) {
+    this.person = person;
+  }
 
-	public personDao getpersonDao() {
-		return personDao;
-	}
+  public PersonDao getPersonDao() {
+    return personDao;
+  }
 
-	public void setpersonDao(PersonDao personDao) {
-		this.personDao = personDao;
-	}
+  public void setPersonDao(PersonDao personDao) {
+    this.personDao = personDao;
+  }
 
-	private void init() {
-		person = new Person();
-		persons = personDao.findAll();
-	}
+  private void init() {
+    person = new Person();
+    persons = personDao.findAll();
+  }
 }

@@ -25,7 +25,7 @@ public class BeanFileService extends JSFFileService {
 
 	@Override
 	public String getTemplateName() {
-		return "bean.ftl";
+		return beanFile.isMediator() ? "controller.ftl" : "bean.ftl";
 	}
 
 	@Override

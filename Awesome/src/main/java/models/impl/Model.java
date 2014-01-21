@@ -3,7 +3,7 @@ package models.impl;
 import java.util.List;
 import java.util.Set;
 
-import models.files.impl.BeanField;
+import models.files.impl.PlainField;
 import models.web.impl.ViewAction;
 import enums.BeanScope;
 
@@ -13,7 +13,8 @@ public class Model {
 	private String title;
 	private boolean mainPage;
 	private boolean viewOnly;
-	private Set<BeanField> fields;
+	private boolean persisted;
+	private Set<PlainField> fields;
 	private List<ViewAction> actions;
 
 	public String getName() {
@@ -56,11 +57,19 @@ public class Model {
 		this.viewOnly = viewOnly;
 	}
 
-	public Set<BeanField> getFields() {
+	public boolean isPersisted() {
+		return persisted;
+	}
+
+	public void setPersisted(boolean persisted) {
+		this.persisted = persisted;
+	}
+
+	public Set<PlainField> getFields() {
 		return fields;
 	}
 
-	public void setFields(final Set<BeanField> fields) {
+	public void setFields(final Set<PlainField> fields) {
 		this.fields = fields;
 	}
 

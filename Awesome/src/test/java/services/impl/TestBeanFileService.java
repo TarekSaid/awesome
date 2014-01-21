@@ -53,7 +53,19 @@ public class TestBeanFileService extends TestCase {
 	}
 
 	@Test
-	public void getTemplateNameShouldReturnBeanFileTemplateName() {
+	public void getTemplateNameShouldReturnControllerWhenMediating() {
+		Mockito.when(beanFile.isMediator()).thenReturn(true);
+
+		String expectedTemplate = "controller.ftl";
+		String actualTemplate = beanFileService.getTemplateName();
+
+		assertEquals(expectedTemplate, actualTemplate);
+	}
+
+	@Test
+	public void getTemplateNameShouldReturnControllerWhenNotMediating() {
+		Mockito.when(beanFile.isMediator()).thenReturn(false);
+
 		String expectedTemplate = "bean.ftl";
 		String actualTemplate = beanFileService.getTemplateName();
 

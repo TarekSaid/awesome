@@ -13,16 +13,41 @@
     <param-value>Development</param-value>
   </context-param>
 
+<#assign h2=false>
 <#if app.models??>
-  <!-- Welcome page -->
-  <welcome-file-list>
   <#list app.models as model>
+    <#if model.persisted>
+      <#assign h2=true>
+    </#if>
     <#if model.mainPage>
-    <welcome-file>faces/${model.name?lower_case}.xhtml</welcome-file>
+      <#if model.persisted>
+        <#assign welcomePage = "${model.name?lower_case}s">
+      <#else>
+        <#assign welcomePage = "${model.name?lower_case}">
+      </#if>
     </#if>
   </#list>
-  </welcome-file-list>
 </#if>
+  <#if h2>
+  <!-- Configuring H2 database -->
+  <listener>
+    <listener-class>org.h2.server.web.DbStarter</listener-class>
+  </listener>
+
+  <context-param>
+    <param-name>db.url</param-name>
+    <param-value>jdbc:h2:~/${app.name}</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.user</param-name>
+    <param-value>sa</param-value>
+  </context-param>
+
+  </#if>
+  <!-- Welcome page -->
+  <welcome-file-list>
+    <welcome-file>faces/${welcomePage}.xhtml</welcome-file>
+  </welcome-file-list>
 
   <!-- JSF mapping -->
   <servlet>

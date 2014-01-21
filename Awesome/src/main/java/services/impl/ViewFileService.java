@@ -18,12 +18,20 @@ public class ViewFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return Paths.get(app.getName(), "src", "main", "webapp", viewFile.getName().concat(".xhtml"));
+		StringBuilder fileName = new StringBuilder(viewFile.getName());
+
+		if (viewFile.isCrud()) {
+			fileName.append("s");
+		}
+
+		fileName.append(".xhtml");
+		
+		return Paths.get(app.getName(), "src", "main", "webapp", fileName.toString());
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "view.ftl";
+		return viewFile.isCrud() ? "crud.ftl" : "view.ftl";
 	}
 
 	@Override

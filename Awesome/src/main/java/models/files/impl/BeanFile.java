@@ -7,12 +7,14 @@ import enums.BeanScope;
 
 public class BeanFile extends FileNameRestriction {
 	private BeanScope scope;
-	private Set<BeanField> fields;
+	private Set<PlainField> fields;
+	private boolean mediator;
 
-	public BeanFile(String name, BeanScope scope, Set<BeanField> fields) {
+	public BeanFile(String name, BeanScope scope, Set<PlainField> fields, boolean mediator) {
 		this.name = name;
 		this.scope = scope;
 		this.fields = fields;
+		this.mediator = mediator;
 	}
 
 	public BeanScope getScope() {
@@ -23,11 +25,19 @@ public class BeanFile extends FileNameRestriction {
 		this.scope = scope;
 	}
 
-	public Set<BeanField> getFields() {
+	public Set<PlainField> getFields() {
 		return fields;
 	}
 
-	public void setFields(final Set<BeanField> fields) {
+	public void setFields(final Set<PlainField> fields) {
 		this.fields = fields;
+	}
+
+	public boolean isMediator() {
+		return mediator;
+	}
+
+	public void setMediator(boolean mediator) {
+		this.mediator = mediator;
 	}
 }

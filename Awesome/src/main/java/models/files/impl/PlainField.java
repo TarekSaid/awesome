@@ -1,9 +1,12 @@
 package models.files.impl;
 
-public class BeanField {
+import enums.FieldProperty;
+
+public class PlainField {
 	private String type;
 	private String name;
 	private String value;
+	private FieldProperty property;
 
 	public String getType() {
 		return type;
@@ -29,6 +32,14 @@ public class BeanField {
 		this.value = value;
 	}
 
+	public FieldProperty getProperty() {
+		return property;
+	}
+
+	public void setProperty(FieldProperty property) {
+		this.property = property;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -45,7 +56,7 @@ public class BeanField {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BeanField other = (BeanField) obj;
+		PlainField other = (PlainField) obj;
 		if (name == null) {
 			if (other.name != null)
 				return false;
