@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.impl.JSFApp;
@@ -30,27 +31,17 @@ public class TestIdFileService extends TestCase {
 	@Test
 	public void getPathShouldReturnIdPath() {
 		Path expectedPath = Paths.get("persistedTest", "src", "main", "java", "models", "Identifiable.java");
-		Path actualPath = idFileService.getPath();
-
-		assertEquals(expectedPath, actualPath);
+		assertThat(idFileService.getPath()).isEqualTo(expectedPath);
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnIdTemplateName() {
-		String expectedTemplate = "identifiable.ftl";
-		String actualTemplate = idFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(idFileService.getTemplateName()).isEqualTo("identifiable.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnJsfApp() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("app", jsfApp);
-
-		Map<String, Object> actualRoot = idFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(idFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
 	@After

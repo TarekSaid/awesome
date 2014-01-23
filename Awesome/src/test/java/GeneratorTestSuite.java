@@ -8,7 +8,9 @@ import services.impl.TestDaoFileService;
 import services.impl.TestDaoImplFileService;
 import services.impl.TestDataSourceFileService;
 import services.impl.TestIdFileService;
+import services.impl.TestMigrationFileService;
 import services.impl.TestModelFileService;
+import services.impl.TestPersistenceFileService;
 import services.impl.TestPomFileService;
 import services.impl.TestViewFileService;
 import services.impl.TestWebFileService;
@@ -28,7 +30,9 @@ import factories.impl.TestJSFServiceFactory;
 	TestDaoFileService.class,
 	TestDaoImplFileService.class,
 	TestAbstractDaoFileService.class,
-	TestDataSourceFileService.class
+	TestDataSourceFileService.class,
+	TestPersistenceFileService.class,
+	TestMigrationFileService.class
 })
 public class GeneratorTestSuite {
 }

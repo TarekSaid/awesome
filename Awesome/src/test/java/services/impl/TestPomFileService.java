@@ -1,9 +1,9 @@
 package services.impl;
 
-import java.nio.file.Path;
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.files.impl.PomFile;
@@ -16,8 +16,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import services.impl.PomFileService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestPomFileService extends TestCase {
@@ -36,31 +34,19 @@ public class TestPomFileService extends TestCase {
 
 		for (String name : names) {
 			Mockito.when(jsfApp.getName()).thenReturn(name);
-			Path expectedPath = Paths.get(name, "pom.xml");
-			Path actualPath = pomFileService.getPath();
-	
-			assertEquals(expectedPath, actualPath);
+			assertThat(pomFileService.getPath()).isEqualTo(Paths.get(name, "pom.xml"));
 		}
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnPomFileTemplateName() {
-		String expectedTemplate = "pom.ftl";
-		String actualTemplate = pomFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(pomFileService.getTemplateName()).isEqualTo("pom.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnPomFile() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("pom", pomFile);
-
 		Mockito.when(jsfApp.getPomFile()).thenReturn(pomFile);
-
-		Map<String, Object> actualRoot = pomFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(pomFileService.getRoot()).contains(entry("pom", pomFile));
 	}
 
 	@After

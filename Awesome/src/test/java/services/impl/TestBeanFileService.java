@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.files.impl.BeanFile;
@@ -17,8 +18,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import services.impl.BeanFileService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestBeanFileService extends TestCase {
@@ -41,44 +40,28 @@ public class TestBeanFileService extends TestCase {
 		for (String fileName : fileNames) {
 			Mockito.when(beanFile.getName()).thenReturn(fileName);
 
-			Path expectedPath = Paths.get("BeanAppTest", "src", "main", "java", "controllers", fileName.concat("Bean.java"));
-			Path actualPath = beanFileService.getPath();
+			Path beanFilePath = Paths.get("BeanAppTest", "src", "main", "java", "controllers", fileName.concat("Bean.java"));
 
-			assertEquals("returned path is different from expected.", expectedPath, actualPath);
+			assertThat(beanFileService.getPath()).isEqualTo(beanFilePath);
 		}
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnControllerWhenMediating() {
 		Mockito.when(beanFile.isMediator()).thenReturn(true);
-
-		String expectedTemplate = "controller.ftl";
-		String actualTemplate = beanFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(beanFileService.getTemplateName()).isEqualTo("controller.ftl");
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnControllerWhenNotMediating() {
 		Mockito.when(beanFile.isMediator()).thenReturn(false);
-
-		String expectedTemplate = "bean.ftl";
-		String actualTemplate = beanFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(beanFileService.getTemplateName()).isEqualTo("bean.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnBeanFileAndPomFile() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("bean", beanFile);
-		expectedRoot.put("pom", pomFile);
-
 		Mockito.when(jsfApp.getPomFile()).thenReturn(pomFile);
-
-		Map<String, Object> actualRoot = beanFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(beanFileService.getRoot()).contains(entry("bean", beanFile), entry("pom", pomFile));
 	}
 
 	@After

@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.files.impl.ModelFile;
@@ -35,29 +36,20 @@ public class TestModelFileService extends TestCase {
 
 		for (String modelName: modelNames) {
 			Mockito.when(modelFile.getName()).thenReturn(modelName);
-			Path expectedPath = Paths.get("model-test", "src", "main", "java", "models", "impl", modelName + ".java");
-			Path actualPath = modelFileService.getPath();
 
-			assertEquals("received model path does not match the expected." + expectedPath, expectedPath, actualPath);
+			Path expectedPath = Paths.get("model-test", "src", "main", "java", "models", "impl", modelName + ".java");
+			assertThat(modelFileService.getPath()).isEqualTo(expectedPath);
 		}
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnModelFileTemplateName() {
-		String expectedTemplate = "model.ftl";
-		String actualTemplate = modelFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(modelFileService.getTemplateName()).isEqualTo("model.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnModelFile() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("model", modelFile);
-
-		Map<String, Object> actualRoot = modelFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(modelFileService.getRoot()).contains(entry("model", modelFile));
 	}
 
 	@After

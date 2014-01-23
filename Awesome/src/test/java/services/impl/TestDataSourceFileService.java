@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.impl.JSFApp;
@@ -30,27 +31,17 @@ public class TestDataSourceFileService extends TestCase {
 	@Test
 	public void getPathShouldReturnDataSourcePath() {
 		Path expectedPath = Paths.get("datasource-test", "src", "main", "java", "models", "enums", "DataSource.java");
-		Path actualPath = dataSourceFileService.getPath();
-
-		assertEquals(expectedPath, actualPath);
+		assertThat(dataSourceFileService.getPath()).isEqualTo(expectedPath);
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnDataSource() {
-		String expectedTemplate = "datasource.ftl";
-		String actualTemplate = dataSourceFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(dataSourceFileService.getTemplateName()).isEqualTo("datasource.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnApp() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("app", jsfApp);
-
-		Map<String, Object> actualRoot = dataSourceFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(dataSourceFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
 	@After

@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.impl.JSFApp;
@@ -29,28 +30,18 @@ public class TestAbstractDaoFileService extends TestCase {
 
 	@Test
 	public void getPathShouldReturnAbstractDaoPath() {
-		Path expectedPath = Paths.get("abstract-dao-test", "src", "main", "java", "models", "daos", "AbstractDao.java");
-		Path actualPath = abstractDaoFileService.getPath();
-
-		assertEquals(expectedPath, actualPath);
+		Path abstractDaoPath = Paths.get("abstract-dao-test", "src", "main", "java", "models", "daos", "AbstractDao.java");
+		assertThat(abstractDaoFileService.getPath()).isEqualTo(abstractDaoPath);
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnAbstractDao() {
-		String expectedTemplateName = "abstract-dao.ftl";
-		String actualTemplateName = abstractDaoFileService.getTemplateName();
-
-		assertEquals(expectedTemplateName, actualTemplateName);
+		assertThat(abstractDaoFileService.getTemplateName()).isEqualTo("abstract-dao.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnApp() {
-		Map<String, Object> expectedRoot = new HashMap<String, Object>();
-		expectedRoot.put("app", jsfApp);
-
-		Map<String, Object> actualRoot = abstractDaoFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(abstractDaoFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
 	@After

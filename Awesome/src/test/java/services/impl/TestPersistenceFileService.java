@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.impl.JSFApp;
@@ -30,27 +31,17 @@ public class TestPersistenceFileService extends TestCase {
 	@Test
 	public void getPathShouldReturnPersistencePath() {
 		Path expectedPath = Paths.get("persistenceTest", "src", "main", "webapp", "META-INF", "persistence.xml");
-		Path actualPath = persistenceFileService.getPath();
-
-		assertEquals(expectedPath, actualPath);
+		assertThat(persistenceFileService.getPath()).isEqualTo(expectedPath);
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnPersistence() {
-		String expectedTemplate = "persistence.ftl";
-		String actualTemplate = persistenceFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(persistenceFileService.getTemplateName()).isEqualTo("persistence.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnApp() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("app", jsfApp);
-
-		Map<String, Object> actualRoot = persistenceFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(persistenceFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
 	@After

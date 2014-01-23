@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.impl.JSFApp;
@@ -15,8 +16,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import services.impl.WebFileService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestWebFileService extends TestCase {
@@ -32,27 +31,17 @@ public class TestWebFileService extends TestCase {
 	@Test
 	public void getPathShouldReturnWebFileFullPath() {
 		Path expectedPath = Paths.get("MyApp", "src", "main", "webapp", "WEB-INF", "web.xml");
-		Path actualPath = webFileService.getPath();
-
-		assertEquals("The path received does not match the expected path.", expectedPath, actualPath);
+		assertThat(webFileService.getPath()).isEqualTo(expectedPath);
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnWebFileTemplateName() {
-		String expectedTemplate = "web.ftl";
-		String actualTemplate = webFileService.getTemplateName();
-
-		assertEquals("The template name received does not match the expected.", expectedTemplate, actualTemplate);
+		assertThat(webFileService.getTemplateName()).isEqualTo("web.ftl");
 	}
 
 	@Test
-	public void getRoot() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("app", jsfApp);
-
-		Map<String, Object> actualRoot = webFileService.getRoot();
-
-		assertEquals("the root object does not match the expected root.", expectedRoot, actualRoot);
+	public void getRootShouldReturnApp() {
+		assertThat(webFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
 	@After

@@ -1,9 +1,10 @@
 package services.impl;
 
+import static org.fest.assertions.api.Assertions.assertThat;
+import static org.fest.assertions.api.Assertions.entry;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import java.util.Map;
 
 import junit.framework.TestCase;
 import models.files.impl.ViewFile;
@@ -16,8 +17,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
-
-import services.impl.ViewFileService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestViewFileService extends TestCase {
@@ -40,9 +39,7 @@ public class TestViewFileService extends TestCase {
 			Mockito.when(viewFile.getName()).thenReturn(fileName);
 
 			Path expectedPath = Paths.get("MyApp", "src", "main", "webapp", fileName.concat(".xhtml"));
-			Path actualPath = viewFileService.getPath();
-
-			assertEquals("returned path is different from expected.", expectedPath, actualPath);
+			assertThat(viewFileService.getPath()).isEqualTo(expectedPath);
 		}
 	}
 
@@ -55,38 +52,25 @@ public class TestViewFileService extends TestCase {
 			Mockito.when(viewFile.getName()).thenReturn(modelName);
 
 			Path expectedPath = Paths.get("MyApp", "src", "main", "webapp", modelName.concat("s.xhtml"));
-			Path actualPath = viewFileService.getPath();
-
-			assertEquals("returned path is different from expected.", expectedPath, actualPath);
+			assertThat(viewFileService.getPath()).isEqualTo(expectedPath);
 		}
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnViewTemplateWhenNotCrud() {
 		Mockito.when(viewFile.isCrud()).thenReturn(false);
-		String expectedTemplate = "view.ftl";
-		String actualTemplate = viewFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(viewFileService.getTemplateName()).isEqualTo("view.ftl");
 	}
 
 	@Test
 	public void getTemplateNameShouldReturnCrudTemplateForCrud() {
 		Mockito.when(viewFile.isCrud()).thenReturn(true);
-		String expectedTemplate = "crud.ftl";
-		String actualTemplate = viewFileService.getTemplateName();
-
-		assertEquals(expectedTemplate, actualTemplate);
+		assertThat(viewFileService.getTemplateName()).isEqualTo("crud.ftl");
 	}
 
 	@Test
 	public void getRootShouldReturnViewFile() {
-		Map<String, Object> expectedRoot = new HashMap<>();
-		expectedRoot.put("view", viewFile);
-
-		Map<String, Object> actualRoot = viewFileService.getRoot();
-
-		assertEquals(expectedRoot, actualRoot);
+		assertThat(viewFileService.getRoot()).contains(entry("view", viewFile));
 	}
 
 	@After
