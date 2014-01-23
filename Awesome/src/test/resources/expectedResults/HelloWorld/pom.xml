@@ -33,6 +33,61 @@
           <target>1.7</target>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.cargo</groupId>
+        <artifactId>cargo-maven2-plugin</artifactId>
+        <version>1.4.6</version>
+        <configuration>
+          <container>
+            <containerId>tomcat7x</containerId>
+            <zipUrlInstaller>
+              <url>http://ftp.unicamp.br/pub/apache/tomcat/tomcat-7/v7.0.50/bin/apache-tomcat-7.0.50.zip</url>
+            </zipUrlInstaller>
+          </container>
+          <configuration>
+            <home>${project.build.directory}/catalina-base</home>
+            <properties>
+              <cargo.servlet.port>8080</cargo.servlet.port>
+              <cargo.rmi.port>$8005</cargo.rmi.port>
+              <cargo.tomcat.ajp.port>8009</cargo.tomcat.ajp.port>
+            </properties>
+          </configuration>
+          <deployables>
+            <deployable>
+              <groupId>br.com.tarek</groupId>
+              <artifactId>helloworld</artifactId>
+              <type>war</type>
+            </deployable>
+          </deployables>
+          <packager>
+            <outputLocation>${project.build.directory}/tomcat7</outputLocation>
+          </packager>
+        </configuration>
+        <executions>
+          <execution>
+            <id>start</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>stop</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>package</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>package</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>
