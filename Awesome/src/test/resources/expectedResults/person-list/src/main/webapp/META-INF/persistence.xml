@@ -8,7 +8,7 @@
     <class>models.impl.Person</class>
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:target/person-list" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/db/person-list" />
       <property name="javax.persistence.jdbc.user" value="sa" />
     </properties>
   </persistence-unit>

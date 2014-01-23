@@ -36,7 +36,7 @@
 
   <context-param>
     <param-name>db.url</param-name>
-    <param-value>jdbc:h2:~/${app.name}</param-value>
+    <param-value>jdbc:h2:~/db/${app.name}</param-value>
   </context-param>
   <context-param>
     <param-name>db.user</param-name>

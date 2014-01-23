@@ -67,7 +67,7 @@
         <artifactId>flyway-maven-plugin</artifactId>
         <version>2.3.1</version>
         <configuration>
-          <url>jdbc:h2:file:target/${pom.artifactId}</url>
+          <url>jdbc:h2:~/db/${pom.artifactId}</url>
           <user>sa</user>
         </configuration>
       </plugin>

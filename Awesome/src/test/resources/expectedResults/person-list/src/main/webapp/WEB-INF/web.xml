@@ -20,7 +20,7 @@
 
   <context-param>
     <param-name>db.url</param-name>
-    <param-value>jdbc:h2:~/person-list</param-value>
+    <param-value>jdbc:h2:~/db/person-list</param-value>
   </context-param>
   <context-param>
     <param-name>db.user</param-name>

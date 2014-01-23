@@ -13,7 +13,7 @@
 [/#list]
     <properties>
       <property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:file:target/${app.name}" />
+      <property name="javax.persistence.jdbc.url" value="jdbc:h2:~/db/${app.name}" />
       <property name="javax.persistence.jdbc.user" value="sa" />
     </properties>
   </persistence-unit>
