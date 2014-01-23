@@ -1,6 +1,6 @@
 {
   "name":"person-list",
-  "pomFile": {"groupId":"br.com.revo", "artifactId":"person-list", "description":"simple CRUD test with Maven, JSF and JPA", "javaVersion":"1.7"},
+  "pomFile": {"groupId":"br.com.revo", "artifactId":"person-list", "description":"simple CRUD test with Maven, JSF and JPA", "javaVersion":"1.7", "persistence":true},
   "models":[
     {"name":"Person",
      "scope":"VIEW",
