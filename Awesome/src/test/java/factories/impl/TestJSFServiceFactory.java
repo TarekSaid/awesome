@@ -1,6 +1,7 @@
 package factories.impl;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static assertions.FileServiceAssert.assertThatMy;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,7 +79,7 @@ public class TestJSFServiceFactory extends TestCase {
 			}
 
 			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-			assertThat(actualServices).containsAll(expectedServices);
+			assertThatMy(actualServices).containsEvery(expectedServices);
 		}
 	}
 
@@ -114,7 +115,7 @@ public class TestJSFServiceFactory extends TestCase {
 			}
 
 			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-			assertThat(actualServices).containsAll(expectedServices);
+			assertThatMy(actualServices).containsEvery(expectedServices);
 		}
 	}
 
@@ -138,7 +139,7 @@ public class TestJSFServiceFactory extends TestCase {
 			}
 
 			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-			assertThat(actualServices).containsAll(expectedServices);
+			assertThatMy(actualServices).containsEvery(expectedServices);
 		}
 	}
 
@@ -167,7 +168,7 @@ public class TestJSFServiceFactory extends TestCase {
 			}
 
 			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-			assertThat(actualServices).containsAll(expectedServices);
+			assertThatMy(actualServices).containsEvery(expectedServices);
 		}
 	}
 

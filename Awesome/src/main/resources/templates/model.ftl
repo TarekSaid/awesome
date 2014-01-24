@@ -1,3 +1,4 @@
+[#ftl]
 package models.impl;
 
 import java.io.Serializable;
@@ -18,10 +19,10 @@ public class ${model.name} implements Serializable, Identifiable {
   @Id
   @GeneratedValue
   private Long id;
-  <#list model.fields as field>
-  @Column<#if field.property??>(${field.property.description})</#if>
+  [#list model.fields as field]
+  @Column[#if field.property??](${field.property.description})[/#if]
   private ${field.type} ${field.name};
-  </#list>
+  [/#list]
 
   public Long getId() {
     return id;
@@ -31,8 +32,8 @@ public class ${model.name} implements Serializable, Identifiable {
     this.id = id;
   }
 
-  <#list model.fields as field>
-  <#assign method = "${field.name?cap_first}">
+  [#list model.fields as field]
+  [#assign method = "${field.name?cap_first}"]
   public ${field.type} get${method}() {
     return ${field.name};
   }
@@ -40,18 +41,18 @@ public class ${model.name} implements Serializable, Identifiable {
   public void set${method}(${field.type} ${field.name}) {
     this.${field.name} = ${field.name};
   }
-  </#list>
+  [/#list]
 
   @Override
   public int hashCode() {
     final int prime = 31;
     int result = 1;
     result = prime * result + ((id == null) ? 0 : id.hashCode());
-    <#list model.fields as field>
-    <#if field.property == "REQUIRED">
+    [#list model.fields as field]
+    [#if field.property == "REQUIRED"]
     result = prime * result + ((${field.name} == null) ? 0 : ${field.name}.hashCode());
-    </#if>
-    </#list>
+    [/#if]
+    [/#list]
     return result;
   }
 
@@ -69,15 +70,15 @@ public class ${model.name} implements Serializable, Identifiable {
         return false;
     } else if (!id.equals(other.id))
       return false;
-    <#list model.fields as field>
-    <#if field.property == "REQUIRED">
+    [#list model.fields as field]
+    [#if field.property == "REQUIRED"]
     if (${field.name} == null) {
       if (other.${field.name} != null)
         return false;
     } else if (!${field.name}.equals(other.${field.name}))
       return false;
-    </#if>
-    </#list>
+    [/#if]
+    [/#list]
     return true;
   }
 }

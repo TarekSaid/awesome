@@ -1,7 +1,7 @@
 package cucumber;
 
 import static java.nio.file.FileVisitResult.CONTINUE;
-import static java.nio.file.FileVisitResult.TERMINATE;
+import static org.fest.assertions.api.Assertions.assertThat;
 import gherkin.deps.com.google.gson.Gson;
 import gherkin.deps.com.google.gson.GsonBuilder;
 import gherkin.deps.com.google.gson.JsonIOException;
@@ -35,7 +35,7 @@ public class GeneratorStepDefs extends TestCase {
 	public void that_I_have_parsed(String mappingFile) throws Throwable {
 	    Path mappingPath = Paths.get("src", "test", "resources", "mappedFiles", mappingFile);
 
-	    assertTrue("Mapped file " + mappingPath.getFileName() + " not found.", Files.exists(mappingPath));
+	    assertThat(mappingPath.toFile()).exists();
 
 	    try (BufferedReader reader = Files.newBufferedReader(mappingPath, Charset.defaultCharset())) {
 	    	Gson gson = new GsonBuilder().create();
@@ -71,36 +71,19 @@ public class GeneratorStepDefs extends TestCase {
 		// step 1: checks if the generated project has the expected file tree.
 		FileTreeComparator fileTreeComparator = new FileTreeComparator(expectedPath, actualPath);
 		Files.walkFileTree(expectedPath, fileTreeComparator);
-		
-		assertTrue(fileTreeComparator.message, fileTreeComparator.isEqual);
 
 		// step 2: checks if the generated project has no other files other than the expected.
 		fileTreeComparator = new FileTreeComparator(actualPath, expectedPath);
 		Files.walkFileTree(actualPath, fileTreeComparator);
-
-		assertTrue(fileTreeComparator.message, fileTreeComparator.isEqual);
 	}
 
 	private class FileTreeComparator extends SimpleFileVisitor<Path> {
 		private Path expectedPath;
 		private Path actualPath;
-		private boolean isEqual = true;
-		private String message;
 
 		public FileTreeComparator(Path expectedPath, Path actualPath) {
 			this.expectedPath = expectedPath;
 			this.actualPath = actualPath;
-		}
-
-		private boolean filesAreEqual(Path expectedFile, Path actualFile) throws IOException {
-			if (Files.exists(actualFile)) {
-				String expectedFileContents = new String(Files.readAllBytes(expectedFile));
-				String actualFileContents = new String(Files.readAllBytes(actualFile));
-
-				return expectedFileContents.equals(actualFileContents);
-			}
-
-			return false;
 		}
 
 		@Override
@@ -108,13 +91,9 @@ public class GeneratorStepDefs extends TestCase {
 			Path relativePath = expectedPath.relativize(expectedDir);
 			Path actualDir = actualPath.resolve(relativePath);
 
-			if (Files.exists(actualDir)) {
-				return CONTINUE;
-			}
+			assertThat(actualDir.toFile()).exists();
 
-			message = "Directory " + actualDir + " does not exist.";
-			isEqual = false;
-			return TERMINATE;
+			return CONTINUE;
 		}
 
 		@Override
@@ -122,14 +101,14 @@ public class GeneratorStepDefs extends TestCase {
 			Path relativePath =  expectedPath.relativize(expectedFile);
 			Path actualFile = actualPath.resolve(relativePath);
 
-			if (filesAreEqual(expectedFile, actualFile)) {
-				return CONTINUE;
-			}
+			assertThat(actualFile.toFile()).exists();
 
-			message = "File " + actualFile + " does not match " + expectedFile + ".";
-			isEqual = false;
+			String expectedFileContents = new String(Files.readAllBytes(expectedFile));
+			String actualFileContents = new String(Files.readAllBytes(actualFile));
 
-			return TERMINATE;
+			assertThat(actualFileContents).isEqualTo(expectedFileContents);
+
+			return CONTINUE;
 		}
 
         @Override

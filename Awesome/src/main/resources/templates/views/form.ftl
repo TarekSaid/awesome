@@ -1,3 +1,4 @@
+[#ftl]
     <h:form>
-<#include "components.ftl">
+[#include "components.ftl"]
     </h:form>

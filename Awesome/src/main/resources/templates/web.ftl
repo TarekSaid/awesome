@@ -1,3 +1,4 @@
+[#ftl]
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
@@ -13,22 +14,22 @@
     <param-value>Development</param-value>
   </context-param>
 
-<#assign h2=false>
-<#if app.models??>
-  <#list app.models as model>
-    <#if model.persisted>
-      <#assign h2=true>
-    </#if>
-    <#if model.mainPage>
-      <#if model.persisted>
-        <#assign welcomePage = "${model.name?lower_case}s">
-      <#else>
-        <#assign welcomePage = "${model.name?lower_case}">
-      </#if>
-    </#if>
-  </#list>
-</#if>
-  <#if h2>
+[#assign h2=false]
+[#if app.models??]
+  [#list app.models as model]
+    [#if model.persisted]
+      [#assign h2=true]
+    [/#if]
+    [#if model.mainPage]
+      [#if model.persisted]
+        [#assign welcomePage = "${model.name?lower_case}s"]
+      [#else]
+        [#assign welcomePage = "${model.name?lower_case}"]
+      [/#if]
+    [/#if]
+  [/#list]
+[/#if]
+  [#if h2]
   <!-- Configuring H2 database -->
   <listener>
     <listener-class>org.h2.server.web.DbStarter</listener-class>
@@ -43,7 +44,7 @@
     <param-value>sa</param-value>
   </context-param>
 
-  </#if>
+  [/#if]
   <!-- Welcome page -->
   <welcome-file-list>
     <welcome-file>faces/${welcomePage}.xhtml</welcome-file>
