@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Persons</title>
+</h:head>
+<h:body>
+  <div align="center">
+    <h:form id="mainForm">
+      <p:dataTable id="persons" value="#{personBean.persons}" var="person" style="width:20%">
+        <p:column headerText="Name">
+          #{person.name}
+       </p:column>
+        <p:column headerText="Actions">
+          <p:commandButton value="Edit" update=":editForm:Edit" oncomplete="editDialog.show()" immediate="true">
+            <f:setPropertyActionListener target="#{personBean.person}" value="#{person}" />
+          </p:commandButton>
+          <p:commandButton value="Delete" update=":deleteForm:Delete" oncomplete="confirmation.show()" immediate="true">
+            <f:setPropertyActionListener target="#{personBean.person}" value="#{person}" />
+          </p:commandButton>
+        </p:column>
+      </p:dataTable>
+      <p:commandButton value="Add" id="create" oncomplete="addDialog.show()" />
+    </h:form>
+  </div>
+  <h:form id="addForm">
+    <p:dialog header="New Person" widgetVar="addDialog" modal="true">
+      <p:panelGrid id="newPanel" columns="2">
+        <h:outputText value="Name:" />
+        <p:inputText value="#{personBean.person.name}" />
+      </p:panelGrid>
+      <p:commandButton value="Add" actionListener="#{personBean.addPerson}" update=":mainForm:persons" oncomplete="addDialog.hide()" />
+    </p:dialog>
+  </h:form>
+  <h:form id="editForm">
+    <p:dialog header="Edit" widgetVar="editDialog" modal="true" id="Edit">
+      <p:panelGrid id="editPanel" columns="2">
+        <h:outputText value="Name:" />
+        <p:inputText value="#{personBean.person.name}" />
+      </p:panelGrid>
+      <p:commandButton value="Edit" actionListener="#{personBean.editPerson}" update=":mainForm:persons" oncomplete="editDialog.hide()" />
+    </p:dialog>
+  </h:form>
+  <h:form id="deleteForm">
+    <p:confirmDialog id="Delete" message="Delete #{personBean.person.name}?" header="Delete" severity="alert" widgetVar="confirmation">
+      <p:commandButton id="confirm" value="Yes" oncomplete="confirmation.hide()" actionListener="#{personBean.deletePerson}" update=":mainForm:persons" />
+      <p:commandButton id="decline" value="No" onclick="confirmation.hide()" type="button" />
+    </p:confirmDialog>
+  </h:form>
+</h:body>
+</html>
