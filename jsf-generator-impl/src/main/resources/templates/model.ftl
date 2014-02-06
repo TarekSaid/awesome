@@ -33,7 +33,7 @@ public class ${model.name} implements Serializable, Identifiable {
   }
 
   [#list model.fields as field]
-  [#assign method = "${field.name?cap_first}"]
+  [#assign method = field.name?cap_first]
   public ${field.type} get${method}() {
     return ${field.name};
   }

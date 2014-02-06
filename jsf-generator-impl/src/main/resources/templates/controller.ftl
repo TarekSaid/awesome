@@ -1,8 +1,8 @@
 [#ftl]
-[#assign model = "${bean.name?lower_case}"]
-[#assign DaoClass = "${bean.name}Dao"]
-[#assign dao = "${model}Dao"]
-[#assign modelList = "${model}s"]
+[#assign model = bean.name?lower_case]
+[#assign DaoClass = bean.name + "Dao"]
+[#assign dao = model + "Dao"]
+[#assign modelList = model + "s"]
 package controllers;
 
 import java.io.Serializable;

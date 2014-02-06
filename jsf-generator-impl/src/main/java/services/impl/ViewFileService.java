@@ -10,6 +10,11 @@ import models.JSFApp;
 import models.files.impl.ViewFile;
 
 public class ViewFileService extends JSFFileService {
+	private static final String VIEW = "view";
+	private static final String VIEW_FTL = "view.ftl";
+	private static final String CRUD_FTL = "crud.ftl";
+	private static final String XHTML = ".xhtml";
+	private static final String S = "s";
 	private ViewFile viewFile;
 	public ViewFileService(JSFApp app, ViewFile viewFile) {
 		super(app);
@@ -21,23 +26,23 @@ public class ViewFileService extends JSFFileService {
 		StringBuilder fileName = new StringBuilder(viewFile.getName());
 
 		if (viewFile.isCrud()) {
-			fileName.append("s");
+			fileName.append(S);
 		}
 
-		fileName.append(".xhtml");
+		fileName.append(XHTML);
 		
 		return WEBAPP_PATH.resolve(Paths.get(fileName.toString()));
 	}
 
 	@Override
 	public String getTemplateName() {
-		return viewFile.isCrud() ? "crud.ftl" : "view.ftl";
+		return viewFile.isCrud() ? CRUD_FTL : VIEW_FTL;
 	}
 
 	@Override
 	public Map<String, Object> getRoot() {
 		Map<String, Object> root = new HashMap<>();
-		root.put("view", viewFile);
+		root.put(VIEW, viewFile);
 
 		return root;
 	}

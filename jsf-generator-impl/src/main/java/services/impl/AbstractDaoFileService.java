@@ -7,17 +7,20 @@ import models.JSFApp;
 import services.JSFFileService;
 
 public class AbstractDaoFileService extends JSFFileService {
+	private static final String ABSTRACT_DAO_JAVA = "AbstractDao.java";
+	private static final String ABSTRACT_DAO_FTL = "abstract-dao.ftl";
+
 	public AbstractDaoFileService(JSFApp app) {
 		super(app);
 	}
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get("models", "daos", "AbstractDao.java"));
+		return JAVA_PATH.resolve(Paths.get(MODELS, DAOS, ABSTRACT_DAO_JAVA));
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "abstract-dao.ftl";
+		return ABSTRACT_DAO_FTL;
 	}
 }

@@ -13,6 +13,7 @@ import java.util.Map;
 
 import models.JSFApp;
 import enums.FreeMarkerConfiguration;
+import factories.impl.ResourceLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -20,15 +21,32 @@ import freemarker.template.TemplateException;
 public abstract class JSFFileService implements FileService {
 	protected JSFApp app;
 	private Configuration cfg = FreeMarkerConfiguration.INSTANCE.getConfiguration();
+
 	protected final Path JAVA_PATH;
 	protected final Path WEBAPP_PATH;
 	protected final Path RESOURCES_PATH;
 
+	protected static final String MODELS = "models";
+	protected static final String DAOS = "daos";
+	protected static final String IMPL = "impl";
+	protected static final String DAO_JAVA = "Dao.java";
+	protected static final String POM = "pom";
+
+	private static final String APP = "app";
+	private static final String WRITER_ERROR = "jsf.file.service.writer.error";
+	private static final String CREATE_FILE_ERROR = "jsf.file.service.create.file.error";
+	private static final String FILE_NOT_FOUND = "jsf.file.service.file.not.found";
+	private static final String RESOURCES = "resources";
+	private static final String WEBAPP = "webapp";
+	private static final String JAVA = "java";
+	private static final String MAIN = "main";
+	private static final String SRC = "src";
+
 	public JSFFileService(JSFApp app) {
 		this.app = app;
-		JAVA_PATH = Paths.get(app.getName(), "src", "main", "java");
-		WEBAPP_PATH = Paths.get(app.getName(), "src", "main", "webapp");
-		RESOURCES_PATH = Paths.get(app.getName(), "src", "main", "resources");
+		JAVA_PATH = Paths.get(app.getName(), SRC, MAIN, JAVA);
+		WEBAPP_PATH = Paths.get(app.getName(), SRC, MAIN, WEBAPP);
+		RESOURCES_PATH = Paths.get(app.getName(), SRC, MAIN, RESOURCES);
 	}
 
 	@Override
@@ -41,15 +59,15 @@ public abstract class JSFFileService implements FileService {
 			Template template = cfg.getTemplate(getTemplateName());
 			template.process(getRoot(), writer);
 		} catch (IOException e) {
-			throw new RuntimeException("Could not find or create file: " + e.getMessage(), e);
+			throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(FILE_NOT_FOUND, e.getMessage()), e);
 		} catch (TemplateException e) {
-			throw new RuntimeException("Error creating file " + app.getName() + ": " + e.getMessage(), e);
+			throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(CREATE_FILE_ERROR, app.getName(), e.getMessage()), e);
 		} finally {
 			if (writer != null) {
 				try {
 					writer.close();
 				} catch (IOException e) {
-					throw new RuntimeException("Could not close writer: " + e.getMessage(), e);
+					throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(WRITER_ERROR, e.getMessage()), e);
 				}
 			}
 		}
@@ -58,7 +76,7 @@ public abstract class JSFFileService implements FileService {
 	@Override
 	public Map<String, Object> getRoot() {
 		Map<String, Object> root = new HashMap<>();
-		root.put("app", app);
+		root.put(APP, app);
 
 		return root;
 	}

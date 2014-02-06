@@ -9,6 +9,8 @@ import models.JSFApp;
 import services.JSFFileService;
 
 public class DaoImplFileService extends JSFFileService {
+	private static final String NAME = "name";
+	private static final String DAO_IMPL_FTL = "dao-impl.ftl";
 	private String daoName;
 
 	public DaoImplFileService(JSFApp app, String daoName) {
@@ -18,18 +20,18 @@ public class DaoImplFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get("models", "daos", "impl", daoName + "Dao.java"));
+		return JAVA_PATH.resolve(Paths.get(MODELS, DAOS, IMPL, daoName + DAO_JAVA));
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "dao-impl.ftl";
+		return DAO_IMPL_FTL;
 	}
 
 	@Override
 	public Map<String, Object> getRoot() {
 		Map<String, Object> root = new HashMap<>();
-		root.put("name", daoName);
+		root.put(NAME, daoName);
 
 		return root;
 	}

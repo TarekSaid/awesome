@@ -7,17 +7,20 @@ import models.JSFApp;
 import services.JSFFileService;
 
 public class IdFileService extends JSFFileService {
+	private static final String IDENTIFIABLE_FTL = "identifiable.ftl";
+	private static final String IDENTIFIABLE_JAVA = "Identifiable.java";
+
 	public IdFileService(JSFApp app) {
 		super(app);
 	}
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get("models", "Identifiable.java"));
+		return JAVA_PATH.resolve(Paths.get(MODELS, IDENTIFIABLE_JAVA));
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "identifiable.ftl";
+		return IDENTIFIABLE_FTL;
 	}
 }

@@ -11,8 +11,11 @@ import services.FileService;
 import controllers.GeneratorController;
 import factories.ServiceFactory;
 import factories.impl.JSFServiceFactory;
+import factories.impl.ResourceLoader;
 
 public class JSFGeneratorController implements GeneratorController {
+	private static final String INTERRUPTED = "controller.executor.interrupted";
+	private static final String TIMEOUT = "controller.executor.timeout";
 	private ExecutorService executor = Executors.newCachedThreadPool();
 	private ServiceFactory serviceFactory = new JSFServiceFactory();
 
@@ -26,11 +29,11 @@ public class JSFGeneratorController implements GeneratorController {
 		try {
 			if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
 				List<Runnable> droppedTasks = executor.shutdownNow();
-				throw new RuntimeException("Could not execute " + droppedTasks.size() + " tasks before 60 seconds.");
+				throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(TIMEOUT, droppedTasks));
 			}
 		} catch (InterruptedException ie) {
 			List<Runnable> droppedTasks = executor.shutdownNow();
-			throw new RuntimeException("Could not execute " + droppedTasks.size() + " tasks: " + ie.getMessage(), ie);
+			throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(INTERRUPTED, droppedTasks, ie.getMessage()), ie);
 		}
 	}
 

@@ -10,6 +10,9 @@ import models.files.impl.ModelFile;
 import services.JSFFileService;
 
 public class ModelFileService extends JSFFileService {
+	private static final String MODEL = "model";
+	private static final String MODEL_FTL = "model.ftl";
+	private static final String _JAVA = ".java";
 	ModelFile modelFile;
 
 	public ModelFileService(JSFApp app, ModelFile modelFile) {
@@ -19,18 +22,18 @@ public class ModelFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get("models", "impl", modelFile.getName() + ".java"));
+		return JAVA_PATH.resolve(Paths.get(MODELS, IMPL, modelFile.getName() + _JAVA));
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "model.ftl";
+		return MODEL_FTL;
 	}
 
 	@Override
 	public Map<String, Object> getRoot() {
 		Map<String, Object> root = new HashMap<>();
-		root.put("model", modelFile);
+		root.put(MODEL, modelFile);
 
 		return root;
 	}

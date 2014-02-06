@@ -7,17 +7,21 @@ import models.JSFApp;
 import services.JSFFileService;
 
 public class PersistenceFileService extends JSFFileService {
+	private static final String PERSISTENCE_FTL = "persistence.ftl";
+	private static final String PERSISTENCE_XML = "persistence.xml";
+	private static final String META_INF = "META-INF";
+
 	public PersistenceFileService(JSFApp app) {
 		super(app);
 	}
 
 	@Override
 	public Path getPath() {
-		return WEBAPP_PATH.resolve(Paths.get("META-INF", "persistence.xml"));
+		return WEBAPP_PATH.resolve(Paths.get(META_INF, PERSISTENCE_XML));
 	}
 
 	@Override
 	public String getTemplateName() {
-		return "persistence.ftl";
+		return PERSISTENCE_FTL;
 	}
 }
