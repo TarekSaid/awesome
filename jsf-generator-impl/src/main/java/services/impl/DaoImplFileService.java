@@ -7,6 +7,7 @@ import java.util.Map;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class DaoImplFileService extends JSFFileService {
 	private static final String NAME = "name";
@@ -20,7 +21,7 @@ public class DaoImplFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get(MODELS, DAOS, IMPL, daoName + DAO_JAVA));
+		return FileServiceUtils.INSTANCE.getJavaPath(app.getName()).resolve(Paths.get(MODELS, DAOS, IMPL, daoName + DAO_JAVA));
 	}
 
 	@Override

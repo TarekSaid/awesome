@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class DataSourceFileService extends JSFFileService {
 	private static final String DATASOURCE_FTL = "datasource.ftl";
@@ -17,7 +18,7 @@ public class DataSourceFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get(MODELS, ENUMS, DATA_SOURCE_JAVA));
+		return FileServiceUtils.INSTANCE.getJavaPath(app.getName()).resolve(Paths.get(MODELS, ENUMS, DATA_SOURCE_JAVA));
 	}
 
 	@Override

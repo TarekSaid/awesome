@@ -13,9 +13,13 @@ import models.impl.Model;
 import services.FileService;
 import services.impl.AbstractDaoFileService;
 import services.impl.BeanFileService;
+import services.impl.CrudFileService;
+import services.impl.CssFileService;
 import services.impl.DaoFileService;
 import services.impl.DaoImplFileService;
 import services.impl.DataSourceFileService;
+import services.impl.DefaultTemplateFileService;
+import services.impl.HeaderTemplateFileService;
 import services.impl.IdFileService;
 import services.impl.MigrationFileService;
 import services.impl.ModelFileService;
@@ -57,10 +61,14 @@ public class JSFServiceFactory implements ServiceFactory {
 			services.add(new DataSourceFileService(jsfApp));
 			services.add(new PersistenceFileService(jsfApp));
 			services.add(new MigrationFileService(jsfApp));
+			services.add(new CrudFileService(jsfApp));
 		}
 
 		services.add(new PomFileService(jsfApp));
 		services.add(new WebFileService(jsfApp));
+		services.add(new DefaultTemplateFileService(jsfApp));
+		services.add(new HeaderTemplateFileService(jsfApp));
+		services.add(new CssFileService(jsfApp));
 
 		return services;
 	}

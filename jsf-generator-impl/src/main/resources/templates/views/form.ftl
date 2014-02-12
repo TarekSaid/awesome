@@ -1,4 +1,4 @@
 [#ftl]
-    <h:form>
+        <h:form>
 [#include "components.ftl"]
-    </h:form>
+        </h:form>

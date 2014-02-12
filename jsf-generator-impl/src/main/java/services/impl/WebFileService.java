@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class WebFileService extends JSFFileService {
 	private static final String WEB_XML = "web.xml";
@@ -17,7 +18,7 @@ public class WebFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return WEBAPP_PATH.resolve(Paths.get(WEB_INF, WEB_XML));
+		return FileServiceUtils.INSTANCE.getWebappPath(app.getName()).resolve(Paths.get(WEB_INF, WEB_XML));
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class IdFileService extends JSFFileService {
 	private static final String IDENTIFIABLE_FTL = "identifiable.ftl";
@@ -16,7 +17,7 @@ public class IdFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get(MODELS, IDENTIFIABLE_JAVA));
+		return FileServiceUtils.INSTANCE.getJavaPath(app.getName()).resolve(Paths.get(MODELS, IDENTIFIABLE_JAVA));
 	}
 
 	@Override

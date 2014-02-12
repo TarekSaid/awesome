@@ -30,7 +30,7 @@ public class TestPersistenceFileService extends TestCase {
 
 	@Test
 	public void getPathShouldReturnPersistencePath() {
-		Path expectedPath = Paths.get("persistenceTest", "src", "main", "webapp", "META-INF", "persistence.xml");
+		Path expectedPath = Paths.get("persistenceTest", "src", "main", "resources", "META-INF", "persistence.xml");
 		assertThat(persistenceFileService.getPath()).isEqualTo(expectedPath);
 	}
 

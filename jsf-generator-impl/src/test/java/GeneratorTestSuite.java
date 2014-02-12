@@ -4,9 +4,13 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import services.impl.TestAbstractDaoFileService;
 import services.impl.TestBeanFileService;
+import services.impl.TestCrudFileService;
+import services.impl.TestCssFileService;
 import services.impl.TestDaoFileService;
 import services.impl.TestDaoImplFileService;
 import services.impl.TestDataSourceFileService;
+import services.impl.TestDefaultTemplateFileService;
+import services.impl.TestHeaderTemplateFileService;
 import services.impl.TestIdFileService;
 import services.impl.TestMigrationFileService;
 import services.impl.TestModelFileService;
@@ -32,7 +36,11 @@ import factories.impl.TestJSFServiceFactory;
 	TestAbstractDaoFileService.class,
 	TestDataSourceFileService.class,
 	TestPersistenceFileService.class,
-	TestMigrationFileService.class
+	TestMigrationFileService.class,
+	TestDefaultTemplateFileService.class,
+	TestHeaderTemplateFileService.class,
+	TestCssFileService.class,
+	TestCrudFileService.class
 })
 public class GeneratorTestSuite {
 }

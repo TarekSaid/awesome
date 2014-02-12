@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class DaoFileService extends JSFFileService {
 	private static final String DAO_FTL = "dao.ftl";
@@ -15,7 +16,7 @@ public class DaoFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get(MODELS, DAOS, DAO_JAVA));
+		return FileServiceUtils.INSTANCE.getJavaPath(app.getName()).resolve(Paths.get(MODELS, DAOS, DAO_JAVA));
 	}
 
 	@Override

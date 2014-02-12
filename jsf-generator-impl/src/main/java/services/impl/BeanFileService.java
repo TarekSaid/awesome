@@ -8,6 +8,7 @@ import java.util.Map;
 import models.JSFApp;
 import models.files.impl.BeanFile;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class BeanFileService extends JSFFileService {
 	private static final String BEAN_JAVA = "Bean.java";
@@ -25,7 +26,7 @@ public class BeanFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get(CONTROLLERS, beanFile.getName() + BEAN_JAVA));
+		return FileServiceUtils.INSTANCE.getJavaPath(app.getName()).resolve(Paths.get(CONTROLLERS, beanFile.getName() + BEAN_JAVA));
 	}
 
 	@Override

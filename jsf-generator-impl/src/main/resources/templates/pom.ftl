@@ -69,7 +69,17 @@
         <configuration>
           <url>jdbc:h2:~/db/${pom.artifactId}</url>
           <user>sa</user>
+          <password>sa</password>
         </configuration>
+        <executions>
+          <execution>
+            <id>migration</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>migrate</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
 [/#if]
 

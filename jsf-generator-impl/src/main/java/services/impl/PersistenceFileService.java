@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class PersistenceFileService extends JSFFileService {
 	private static final String PERSISTENCE_FTL = "persistence.ftl";
@@ -17,7 +18,7 @@ public class PersistenceFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return WEBAPP_PATH.resolve(Paths.get(META_INF, PERSISTENCE_XML));
+		return FileServiceUtils.INSTANCE.getResourcesPath(app.getName()).resolve(Paths.get(META_INF, PERSISTENCE_XML));
 	}
 
 	@Override

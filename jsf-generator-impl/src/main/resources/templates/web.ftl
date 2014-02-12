@@ -43,6 +43,10 @@
     <param-name>db.user</param-name>
     <param-value>sa</param-value>
   </context-param>
+  <context-param>
+    <param-name>db.password</param-name>
+    <param-value>sa</param-value>
+  </context-param>
 
   [/#if]
   <!-- Welcome page -->

@@ -8,6 +8,7 @@ import java.util.Map;
 import models.JSFApp;
 import models.files.impl.ModelFile;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class ModelFileService extends JSFFileService {
 	private static final String MODEL = "model";
@@ -22,7 +23,7 @@ public class ModelFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get(MODELS, IMPL, modelFile.getName() + _JAVA));
+		return FileServiceUtils.INSTANCE.getJavaPath(app.getName()).resolve(Paths.get(MODELS, IMPL, modelFile.getName() + _JAVA));
 	}
 
 	@Override

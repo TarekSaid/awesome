@@ -1,7 +1,7 @@
 package factories.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
 import static assertions.FileServiceAssert.assertThatMy;
+import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +27,13 @@ import services.FileService;
 import services.JSFFileService;
 import services.impl.AbstractDaoFileService;
 import services.impl.BeanFileService;
+import services.impl.CrudFileService;
+import services.impl.CssFileService;
 import services.impl.DaoFileService;
 import services.impl.DaoImplFileService;
 import services.impl.DataSourceFileService;
+import services.impl.DefaultTemplateFileService;
+import services.impl.HeaderTemplateFileService;
 import services.impl.IdFileService;
 import services.impl.MigrationFileService;
 import services.impl.ModelFileService;
@@ -54,10 +58,7 @@ public class TestJSFServiceFactory extends TestCase {
 
 	@Test
 	public void serviceFactoryShouldReturnPomFileService() {
-		PomFileService expectedService = new PomFileService(jsfApp);
-		List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-
-		assertThat(actualServices).contains(expectedService);
+		assertThat(serviceFactory.getServices(jsfApp)).contains(new PomFileService(jsfApp));
 	}
 
 	@Test
@@ -78,8 +79,7 @@ public class TestJSFServiceFactory extends TestCase {
 				expectedServices.add(new BeanFileService(jsfApp, new BeanFile(m.getName(), m.getScope(), m.getFields(), false)));
 			}
 
-			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-			assertThatMy(actualServices).containsEvery(expectedServices);
+			assertThatMy(serviceFactory.getServices(jsfApp)).containsEvery(expectedServices);
 		}
 	}
 
@@ -91,10 +91,7 @@ public class TestJSFServiceFactory extends TestCase {
 
 	@Test
 	public void serviceFactoryShouldReturnWebFileService() {
-		WebFileService webFileService = new WebFileService(jsfApp);
-		List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-
-		assertThat(actualServices).contains(webFileService);
+		assertThat(serviceFactory.getServices(jsfApp)).contains(new WebFileService(jsfApp));
 	}
 
 	@Test
@@ -138,8 +135,7 @@ public class TestJSFServiceFactory extends TestCase {
 				expectedServices.add(new ModelFileService(jsfApp, new ModelFile(m.getName(), m.getFields())));
 			}
 
-			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-			assertThatMy(actualServices).containsEvery(expectedServices);
+			assertThatMy(serviceFactory.getServices(jsfApp)).containsEvery(expectedServices);
 		}
 	}
 
@@ -167,8 +163,7 @@ public class TestJSFServiceFactory extends TestCase {
 				expectedServices.add(new DaoImplFileService(jsfApp, m.getName()));
 			}
 
-			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-			assertThatMy(actualServices).containsEvery(expectedServices);
+			assertThatMy(serviceFactory.getServices(jsfApp)).containsEvery(expectedServices);
 		}
 	}
 
@@ -237,6 +232,31 @@ public class TestJSFServiceFactory extends TestCase {
 		actualServices(SHOULD_NOT_CONTAIN_SERVICE, new MigrationFileService(jsfApp));
 	}
 
+	@Test
+	public void serviceFactoryShouldReturnDefaultTemplateFileService() {
+		assertThat(serviceFactory.getServices(jsfApp)).contains(new DefaultTemplateFileService(jsfApp));
+	}
+
+	@Test
+	public void serviceFactoryShouldReturnHeaderTemplateFileService() {
+		assertThat(serviceFactory.getServices(jsfApp)).contains(new HeaderTemplateFileService(jsfApp));
+	}
+
+	@Test
+	public void serviceFactoryShouldReturnCssFileService() {
+		assertThat(serviceFactory.getServices(jsfApp)).contains(new CssFileService(jsfApp));
+	}
+
+	@Test
+	public void serviceFactoryShouldReturnCrudFileServiceForPesistedModels() {
+		actualServices(SHOULD_CONTAIN_SERVICE, new CrudFileService(jsfApp));
+	}
+
+	@Test
+	public void serviceFactoryShouldNotReturnCrudFileServiceForNonPersistedModels() {
+		actualServices(SHOULD_NOT_CONTAIN_SERVICE, new CrudFileService(jsfApp));
+	}
+
 	@After
 	public void destroyFactory() {
 		serviceFactory = null;
@@ -247,22 +267,14 @@ public class TestJSFServiceFactory extends TestCase {
 	private <T extends JSFFileService> void actualServices(boolean shouldContainService, T expectedService) {
 		Mockito.when(model.isPersisted()).thenReturn(shouldContainService);
 
-		// creating different sizes of sets of models
-		List<Set<Model>> listOfModels = new ArrayList<>();
-		listOfModels.add(Sets.newSet(model));
-		listOfModels.add(Sets.newSet(model, model));
-		listOfModels.add(Sets.newSet(model, model, model));
+		Mockito.when(jsfApp.getModels()).thenReturn(Sets.newSet(model));
 
-		for (Set<Model> models : listOfModels) {
-			Mockito.when(jsfApp.getModels()).thenReturn(models);
+		List<FileService> actualServices = serviceFactory.getServices(jsfApp);
 
-			List<FileService> actualServices = serviceFactory.getServices(jsfApp);
-
-			if (shouldContainService) {
-				assertThat(actualServices).contains(expectedService);
-			} else {
-				assertThat(actualServices).doesNotContain(expectedService);
-			}
+		if (shouldContainService) {
+			assertThat(actualServices).contains(expectedService);
+		} else {
+			assertThat(actualServices).doesNotContain(expectedService);
 		}
 	}
 }

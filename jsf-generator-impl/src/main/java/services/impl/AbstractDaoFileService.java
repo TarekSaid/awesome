@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class AbstractDaoFileService extends JSFFileService {
 	private static final String ABSTRACT_DAO_JAVA = "AbstractDao.java";
@@ -16,7 +17,7 @@ public class AbstractDaoFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return JAVA_PATH.resolve(Paths.get(MODELS, DAOS, ABSTRACT_DAO_JAVA));
+		return FileServiceUtils.INSTANCE.getJavaPath(app.getName()).resolve(Paths.get(MODELS, DAOS, ABSTRACT_DAO_JAVA));
 	}
 
 	@Override

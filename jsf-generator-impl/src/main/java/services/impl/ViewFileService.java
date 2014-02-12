@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 import models.JSFApp;
 import models.files.impl.ViewFile;
 
@@ -14,7 +15,6 @@ public class ViewFileService extends JSFFileService {
 	private static final String VIEW_FTL = "view.ftl";
 	private static final String CRUD_FTL = "crud.ftl";
 	private static final String XHTML = ".xhtml";
-	private static final String S = "s";
 	private ViewFile viewFile;
 	public ViewFileService(JSFApp app, ViewFile viewFile) {
 		super(app);
@@ -26,12 +26,12 @@ public class ViewFileService extends JSFFileService {
 		StringBuilder fileName = new StringBuilder(viewFile.getName());
 
 		if (viewFile.isCrud()) {
-			fileName.append(S);
+			fileName.append("s");
 		}
 
 		fileName.append(XHTML);
-		
-		return WEBAPP_PATH.resolve(Paths.get(fileName.toString()));
+
+		return FileServiceUtils.INSTANCE.getWebappPath(app.getName()).resolve(Paths.get(fileName.toString()));
 	}
 
 	@Override

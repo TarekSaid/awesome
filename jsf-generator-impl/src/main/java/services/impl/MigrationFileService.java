@@ -5,10 +5,11 @@ import java.nio.file.Paths;
 
 import models.JSFApp;
 import services.JSFFileService;
+import services.utils.FileServiceUtils;
 
 public class MigrationFileService extends JSFFileService {
 	private static final String MIGRATION_FTL = "migration.ftl";
-	private static final String V1_INITIAL_SETUP_SQL = "V1__InitialSetup.sql";
+	private static final String INITIAL_SETUP = "V1__InitialSetup.sql";
 	private static final String MIGRATION = "migration";
 	private static final String DB = "db";
 
@@ -18,7 +19,7 @@ public class MigrationFileService extends JSFFileService {
 
 	@Override
 	public Path getPath() {
-		return RESOURCES_PATH.resolve(Paths.get(DB, MIGRATION, V1_INITIAL_SETUP_SQL));
+		return FileServiceUtils.INSTANCE.getResourcesPath(app.getName()).resolve(Paths.get(DB, MIGRATION, INITIAL_SETUP));
 	}
 
 	@Override
