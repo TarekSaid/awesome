@@ -1,0 +1,6 @@
+<component name="jsf-generator-impl">
+    <implementation class="controllers.impl.JSFGeneratorController"/>
+    <service>
+        <provide interface="controllers.GeneratorController"/>
+    </service>
+</component>

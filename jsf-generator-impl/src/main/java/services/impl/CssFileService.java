@@ -4,11 +4,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import models.JSFApp;
-import services.FileService;
 import services.JSFFileService;
 import services.utils.FileServiceUtils;
 
-public class CssFileService extends JSFFileService implements FileService {
+public class CssFileService extends JSFFileService {
 	private static final String CSS_FTL = "css.ftl";
 	private static final String DEFAULT_CSS = "default.css";
 	private static final String CSS = "css";
