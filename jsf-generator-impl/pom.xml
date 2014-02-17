@@ -18,6 +18,13 @@
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
 
+    <!-- JSF Messaging -->
+    <dependency>
+      <groupId>br.com.revo</groupId>
+      <artifactId>jsf-messaging-impl</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
     <!-- Templating library -->
     <dependency>
       <groupId>org.freemarker</groupId>
