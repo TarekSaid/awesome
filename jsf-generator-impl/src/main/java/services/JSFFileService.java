@@ -9,9 +9,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
+import controllers.ResourceLoader;
 import models.JSFApp;
 import enums.FreeMarkerConfiguration;
-import factories.impl.ResourceLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -45,15 +45,15 @@ public abstract class JSFFileService implements FileService {
 			Template template = cfg.getTemplate(getTemplateName());
 			template.process(getRoot(), writer);
 		} catch (IOException e) {
-			throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(FILE_NOT_FOUND, e.getMessage()), e);
+			throw new RuntimeException(ResourceLoader.INSTANCE.getMessage(FILE_NOT_FOUND, e.getMessage()), e);
 		} catch (TemplateException e) {
-			throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(CREATE_FILE_ERROR, app.getName(), e.getMessage()), e);
+			throw new RuntimeException(ResourceLoader.INSTANCE.getMessage(CREATE_FILE_ERROR, app.getName(), e.getMessage()), e);
 		} finally {
 			if (writer != null) {
 				try {
 					writer.close();
 				} catch (IOException e) {
-					throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(WRITER_ERROR, e.getMessage()), e);
+					throw new RuntimeException(ResourceLoader.INSTANCE.getMessage(WRITER_ERROR, e.getMessage()), e);
 				}
 			}
 		}

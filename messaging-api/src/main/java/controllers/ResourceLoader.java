@@ -27,6 +27,10 @@ public enum ResourceLoader {
 		this.resources.clear();
 	}
 
+	public Set<AbstractResourceMap> listResources() {
+		return resources;
+	}
+
 	public String getMessage(String key, Object... params) {
 		for (AbstractResourceMap resource : resources) {
 			if (resource.containsKey(key)) {

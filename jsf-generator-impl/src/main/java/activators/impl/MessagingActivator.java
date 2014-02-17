@@ -13,7 +13,7 @@ public class MessagingActivator implements BundleActivator {
 	private static final Logger LOGGER = LoggerFactory.getLogger(MessagingActivator.class);
 	@Override
 	public void start(BundleContext context) throws Exception {
-		context.registerService(ResourceFactory.class, new JSFResourceFactory(), null);
+		context.getService(context.getServiceReference(JSFResourceFactory.class));
 		LOGGER.debug("Registering JSFResourceFactory service.");
 	}
 

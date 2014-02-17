@@ -9,9 +9,9 @@ import java.util.concurrent.TimeUnit;
 import models.App;
 import services.FileService;
 import controllers.GeneratorController;
+import controllers.ResourceLoader;
 import factories.ServiceFactory;
 import factories.impl.JSFServiceFactory;
-import factories.impl.ResourceLoader;
 
 public class JSFGeneratorController implements GeneratorController {
 	private static final String INTERRUPTED = "controller.executor.interrupted";
@@ -29,11 +29,11 @@ public class JSFGeneratorController implements GeneratorController {
 		try {
 			if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
 				List<Runnable> droppedTasks = executor.shutdownNow();
-				throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(TIMEOUT, droppedTasks));
+				throw new RuntimeException(ResourceLoader.INSTANCE.getMessage(TIMEOUT, droppedTasks));
 			}
 		} catch (InterruptedException ie) {
 			List<Runnable> droppedTasks = executor.shutdownNow();
-			throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(INTERRUPTED, droppedTasks, ie.getMessage()), ie);
+			throw new RuntimeException(ResourceLoader.INSTANCE.getMessage(INTERRUPTED, droppedTasks, ie.getMessage()), ie);
 		}
 	}
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
-import factories.impl.ResourceLoader;
+import controllers.ResourceLoader;
 import freemarker.template.Configuration;
 import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.TemplateExceptionHandler;
@@ -23,7 +23,7 @@ public enum FreeMarkerConfiguration {
 		try {
 			cfg.setDirectoryForTemplateLoading(Paths.get("src", "main", "resources", "templates").toFile());
 		} catch (IOException e) {
-			throw new RuntimeException(ResourceLoader.EXCEPTIONS.getMessage(TEMPLATE_ERROR, e.getMessage()), e);
+			throw new RuntimeException(ResourceLoader.INSTANCE.getMessage(TEMPLATE_ERROR, e.getMessage()), e);
 		}
 
 		cfg.setObjectWrapper(new DefaultObjectWrapper());
