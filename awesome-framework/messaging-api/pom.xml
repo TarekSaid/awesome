@@ -1,0 +1,12 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>br.com.revo</groupId>
+    <artifactId>awesome-framework</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>messaging-api</artifactId>
+	<name>messaging-api</name>
+	<description>API to group messaging in a different bundle. That way, new translations do not affect the main project.</description>
+</project>

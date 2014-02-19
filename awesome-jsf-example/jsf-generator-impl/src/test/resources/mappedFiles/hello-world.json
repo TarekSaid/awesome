@@ -1,0 +1,22 @@
+{
+  "name":"HelloWorld",
+  "pomFile": {"groupId":"br.com.tarek", "artifactId":"HelloWorld", "description":"Testing the Generator", "javaVersion":"1.7"},
+  "models":[
+    {"name":"Hello",
+     "scope":"SESSION",
+     "title":"Hello World",
+     "mainPage":true,
+     "fields":[{"type":"String", "name":"name"}],
+     "actions":[
+      {"actionType":"DISPLAY", "value":"Name:"},
+      {"actionType":"ASSIGN", "value":"#{helloBean.name}"},
+      {"actionType":"BUTTON", "value":"hello-result"}
+     ]
+    },
+    {"name":"hello-result",
+     "viewOnly":true,
+     "title":"Hello World",
+     "actions":[{"actionType":"DISPLAY", "value":"Hello, #{helloBean.name}"}]
+    } 
+  ]
+}

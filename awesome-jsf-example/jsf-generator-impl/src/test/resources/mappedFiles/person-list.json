@@ -1,0 +1,13 @@
+{
+  "name":"person-list",
+  "pomFile": {"groupId":"br.com.revo", "artifactId":"person-list", "description":"simple CRUD test with Maven, JSF and JPA", "javaVersion":"1.7", "persistence":true},
+  "models":[
+    {"name":"Person",
+     "scope":"VIEW",
+     "title":"Persons",
+     "mainPage":true,
+     "persisted":true,
+     "fields":[{"type":"String", "name":"name", "property":"REQUIRED"}]
+    }
+  ]
+}

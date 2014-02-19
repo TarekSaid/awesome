@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.2.0" name="AbstractResourceFactory">
+	<component name="jsf-messaging-impl">
+		<implementation class="factories.impl.JSFResourceFactory" />
+		<service>
+			<provide interface="factories.AbstractResourceFactory" />
+		</service>
+	</component>
+</scr:component>
