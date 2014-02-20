@@ -9,3 +9,6 @@
 /jsf-generator-impl/.classpath
 /jsf-generator-impl/.project
 /jsf-generator-impl/target
+/jsf-generator-impl/HelloWorld
+/jsf-generator-impl/simplehello
+/jsf-generator-impl/person-list
