@@ -1,4 +1,4 @@
-package properties.impl;
+package properties;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 import junit.framework.TestCase;

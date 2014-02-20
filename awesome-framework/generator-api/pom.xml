@@ -7,6 +7,21 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>generator-api</artifactId>
+  <packaging>bundle</packaging>
   <name>generator-api</name>
   <description>Api for the source code generator</description>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
 </project>

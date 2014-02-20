@@ -1,4 +1,4 @@
-package factories.impl;
+package factories;
 
 import factories.ResourceFactory;
 
