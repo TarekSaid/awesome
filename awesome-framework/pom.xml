@@ -87,7 +87,7 @@
 					<configuration>
 						<instructions>
 							<!-- Read all OSGi configuration info from this optional file -->
-							<_include>src/main/resources/OSGI-INF/osgi.properties</_include>
+							<_include>-src/main/resources/OSGI-INF/osgi.properties</_include>
 							<!-- By default, we don't export anything -->
 							<Export-Package>!*.impl.*, *</Export-Package>
 							<Embed-Dependency>*;scope=compile|runtime;inline=false</Embed-Dependency>
