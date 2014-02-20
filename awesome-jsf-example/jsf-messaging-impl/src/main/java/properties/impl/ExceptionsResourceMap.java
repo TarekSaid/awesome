@@ -1,5 +1,7 @@
 package properties.impl;
 
+import properties.AbstractResourceMap;
+
 public class ExceptionsResourceMap extends AbstractResourceMap {
 	@Override
 	public void populateProperties() {
