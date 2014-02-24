@@ -27,18 +27,21 @@
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
+      <optional>true</optional>
     </dependency>
 
     <!-- Fest assertions -->
     <dependency>
       <groupId>org.easytesting</groupId>
       <artifactId>fest-assert-core</artifactId>
+      <optional>true</optional>
     </dependency>
 
     <!-- Mockito -->
     <dependency>
       <groupId>org.mockito</groupId>
       <artifactId>mockito-all</artifactId>
+      <optional>true</optional>
     </dependency>
 
     <!-- Cucumber-JVM -->
@@ -47,6 +50,7 @@
       <artifactId>cucumber-java</artifactId>
       <version>1.1.5</version>
       <scope>test</scope>
+      <optional>true</optional>
     </dependency>
 
     <dependency>
@@ -54,6 +58,7 @@
       <artifactId>cucumber-junit</artifactId>
       <version>1.1.5</version>
       <scope>test</scope>
+      <optional>true</optional>
     </dependency>
 
     <!-- Generator API -->
@@ -61,6 +66,7 @@
       <groupId>br.com.revo</groupId>
       <artifactId>generator-api</artifactId>
       <version>0.0.1-SNAPSHOT</version>
+      <optional>true</optional>
     </dependency>
 
     <!-- JSF Messaging -->
@@ -68,6 +74,7 @@
       <groupId>br.com.revo</groupId>
       <artifactId>jsf-messaging-impl</artifactId>
       <version>0.0.1-SNAPSHOT</version>
+      <optional>true</optional>
     </dependency>
 
     <!-- Templating library -->
@@ -75,6 +82,7 @@
       <groupId>org.freemarker</groupId>
       <artifactId>freemarker</artifactId>
       <version>2.3.20</version>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
