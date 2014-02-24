@@ -7,12 +7,18 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 import models.App;
+
+import org.apache.felix.ipojo.annotations.Component;
+import org.apache.felix.ipojo.annotations.Provides;
+
 import services.FileService;
 import controllers.GeneratorController;
 import controllers.ResourceLoader;
 import factories.ServiceFactory;
 import factories.impl.JSFServiceFactory;
 
+@Component
+@Provides
 public class JSFGeneratorController implements GeneratorController {
 	private static final String INTERRUPTED = "controller.executor.interrupted";
 	private static final String TIMEOUT = "controller.executor.timeout";

@@ -7,7 +7,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>jsf-messaging-impl</artifactId>
-    <packaging>bundle</packaging>
+  <packaging>bundle</packaging>
   <name>jsf-messaging-impl</name>
   <description>Implementation of the messaging-api for the jsf generator</description>
   <properties>
@@ -20,6 +20,11 @@
       <groupId>br.com.revo</groupId>
       <artifactId>messaging-api</artifactId>
       <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.ipojo.annotations</artifactId>
     </dependency>
   </dependencies>
 
