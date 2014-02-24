@@ -25,6 +25,7 @@
     <dependency>
       <groupId>org.apache.felix</groupId>
       <artifactId>org.apache.felix.ipojo.annotations</artifactId>
+      <optional>true</optional>
     </dependency>
   </dependencies>
 
@@ -38,6 +39,11 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+          <instructions combine.children="append">
+            <Import-Package>factories;properties</Import-Package>
+          </instructions>
+        </configuration>
       </plugin>
     </plugins>
   </build>

@@ -5,8 +5,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import models.JSFApp;
-import services.JSFFileService;
+import models.impl.JSFApp;
 import services.utils.FileServiceUtils;
 
 public class DaoImplFileService extends JSFFileService {

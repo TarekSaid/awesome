@@ -5,8 +5,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import services.JSFFileService;
-import models.JSFApp;
+import models.impl.JSFApp;
 
 public class PomFileService extends JSFFileService {
 	private static final String POM_FTL = "pom.ftl";

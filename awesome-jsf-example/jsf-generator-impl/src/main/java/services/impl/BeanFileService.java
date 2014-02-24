@@ -5,9 +5,8 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import models.JSFApp;
 import models.files.impl.BeanFile;
-import services.JSFFileService;
+import models.impl.JSFApp;
 import services.utils.FileServiceUtils;
 
 public class BeanFileService extends JSFFileService {

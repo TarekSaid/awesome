@@ -7,9 +7,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import junit.framework.TestCase;
-import models.JSFApp;
 import models.files.impl.BeanFile;
 import models.files.impl.PomFile;
+import models.impl.JSFApp;
 
 import org.junit.After;
 import org.junit.Before;

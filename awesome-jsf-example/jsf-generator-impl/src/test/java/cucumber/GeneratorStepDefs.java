@@ -19,7 +19,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 
 import junit.framework.TestCase;
 import models.App;
-import models.JSFApp;
+import models.impl.JSFApp;
 import controllers.GeneratorController;
 import controllers.impl.JSFGeneratorController;
 import cucumber.api.java.en.Given;

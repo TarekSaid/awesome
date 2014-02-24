@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import junit.framework.TestCase;
 import models.App;
-import models.JSFApp;
+import models.impl.JSFApp;
 
 import org.junit.After;
 import org.junit.Before;

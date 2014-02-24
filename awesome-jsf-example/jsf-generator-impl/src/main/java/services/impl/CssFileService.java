@@ -3,8 +3,7 @@ package services.impl;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import models.JSFApp;
-import services.JSFFileService;
+import models.impl.JSFApp;
 import services.utils.FileServiceUtils;
 
 public class CssFileService extends JSFFileService {

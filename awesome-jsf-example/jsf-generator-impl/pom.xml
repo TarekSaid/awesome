@@ -15,6 +15,13 @@
   </properties>
 
   <dependencies>
+      <!-- iPojo annotations to configure bundles -->
+      <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.ipojo.annotations</artifactId>
+      <optional>true</optional>
+    </dependency>
+
     <!-- Test dependencies -->
     <!-- Junit -->
     <dependency>
@@ -81,6 +88,11 @@
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
+        <configuration>
+         <instructions combine.children="append">
+          <Import-Package>controllers;factories;models;services</Import-Package>
+         </instructions>
+        </configuration>
       </plugin>
     </plugins>
   </build>

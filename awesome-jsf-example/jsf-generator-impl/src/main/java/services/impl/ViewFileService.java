@@ -5,10 +5,9 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
-import services.JSFFileService;
 import services.utils.FileServiceUtils;
-import models.JSFApp;
 import models.files.impl.ViewFile;
+import models.impl.JSFApp;
 
 public class ViewFileService extends JSFFileService {
 	private static final String VIEW = "view";

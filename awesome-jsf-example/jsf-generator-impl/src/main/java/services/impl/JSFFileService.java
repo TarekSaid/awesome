@@ -1,4 +1,4 @@
-package services;
+package services.impl;
 
 
 import java.io.BufferedWriter;
@@ -9,8 +9,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
+import services.FileService;
 import controllers.ResourceLoader;
-import models.JSFApp;
+import models.impl.JSFApp;
 import enums.FreeMarkerConfiguration;
 import freemarker.template.Configuration;
 import freemarker.template.Template;

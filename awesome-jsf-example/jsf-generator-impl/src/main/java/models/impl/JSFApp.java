@@ -1,4 +1,4 @@
-package models;
+package models.impl;
 
 
 import java.util.HashSet;
@@ -6,7 +6,6 @@ import java.util.Set;
 
 import models.App;
 import models.files.impl.PomFile;
-import models.impl.Model;
 
 public class JSFApp implements App {
 	private String name;

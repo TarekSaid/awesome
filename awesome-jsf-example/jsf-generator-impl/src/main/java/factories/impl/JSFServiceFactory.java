@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import models.App;
-import models.JSFApp;
 import models.files.impl.BeanFile;
 import models.files.impl.ModelFile;
 import models.files.impl.ViewFile;
+import models.impl.JSFApp;
 import models.impl.Model;
 import services.FileService;
 import services.impl.AbstractDaoFileService;

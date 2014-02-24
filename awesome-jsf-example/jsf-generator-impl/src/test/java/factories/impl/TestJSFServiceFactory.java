@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Set;
 
 import junit.framework.TestCase;
-import models.JSFApp;
 import models.files.impl.BeanFile;
 import models.files.impl.ModelFile;
 import models.files.impl.ViewFile;
+import models.impl.JSFApp;
 import models.impl.Model;
 
 import org.junit.After;
@@ -24,7 +24,6 @@ import org.mockito.internal.util.collections.Sets;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import services.FileService;
-import services.JSFFileService;
 import services.impl.AbstractDaoFileService;
 import services.impl.BeanFileService;
 import services.impl.CrudFileService;
@@ -35,6 +34,7 @@ import services.impl.DataSourceFileService;
 import services.impl.DefaultTemplateFileService;
 import services.impl.HeaderTemplateFileService;
 import services.impl.IdFileService;
+import services.impl.JSFFileService;
 import services.impl.MigrationFileService;
 import services.impl.ModelFileService;
 import services.impl.PersistenceFileService;
