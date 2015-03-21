@@ -1,33 +1,29 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.files.impl.BeanFile;
+import models.files.impl.PomFile;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.files.impl.BeanFile;
-import models.files.impl.PomFile;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestBeanFileService extends TestCase {
+@Test
+public class TestBeanFileService {
 	private BeanFileService beanFileService;
 	@Mock private JSFApp jsfApp;
 	@Mock private PomFile pomFile;
 	@Mock private BeanFile beanFile;
 
-	@Before
+	@BeforeMethod
 	public void prepareBeanFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("BeanAppTest");
 		beanFileService = new BeanFileService(jsfApp, beanFile);
 	}
@@ -64,11 +60,9 @@ public class TestBeanFileService extends TestCase {
 		assertThat(beanFileService.getRoot()).contains(entry("bean", beanFile), entry("pom", pomFile));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyBeanFileService() {
+    Mockito.reset(jsfApp, pomFile, beanFile);
 		beanFileService = null;
-		jsfApp = null;
-		pomFile = null;
-		beanFile = null;
 	}
 }

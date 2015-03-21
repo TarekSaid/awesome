@@ -1,29 +1,25 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestMigrationFileService extends TestCase {
+@Test
+public class TestMigrationFileService {
 	private MigrationFileService migrationFileService;
 	@Mock private JSFApp jsfApp;
 
-	@Before
+	@BeforeMethod
 	public void prepareMigrationFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("migrationProject");
 		migrationFileService = new MigrationFileService(jsfApp);
 	}
@@ -44,9 +40,9 @@ public class TestMigrationFileService extends TestCase {
 		assertThat(migrationFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyMigrationFileService() {
+    Mockito.reset(jsfApp);
 		migrationFileService = null;
-		jsfApp = null;
 	}
 }

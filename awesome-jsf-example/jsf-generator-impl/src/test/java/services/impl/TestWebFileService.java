@@ -1,29 +1,25 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestWebFileService extends TestCase {
+@Test
+public class TestWebFileService {
 	private WebFileService webFileService;
 	@Mock private JSFApp jsfApp;
 
-	@Before
+	@BeforeMethod
 	public void prepareWebFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("MyApp");
 		webFileService = new WebFileService(jsfApp);
 	}
@@ -41,12 +37,12 @@ public class TestWebFileService extends TestCase {
 
 	@Test
 	public void getRootShouldReturnApp() {
-		assertThat(webFileService.getRoot()).contains(entry("app", jsfApp));
-	}
+    assertThat(webFileService.getRoot()).contains(entry("app", jsfApp));
+  }
 
-	@After
+	@AfterMethod
 	public void destroyWebFileService() {
+    Mockito.reset(jsfApp);
 		webFileService = null;
-		jsfApp = null;
 	}
 }

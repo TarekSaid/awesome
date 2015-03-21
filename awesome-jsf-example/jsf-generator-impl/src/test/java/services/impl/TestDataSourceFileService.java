@@ -1,29 +1,25 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestDataSourceFileService extends TestCase {
+@Test
+public class TestDataSourceFileService {
 	private DataSourceFileService dataSourceFileService;
 	@Mock private JSFApp jsfApp;
 
-	@Before
+	@BeforeMethod
 	public void prepareDataSourceFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("datasource-test");
 		dataSourceFileService = new DataSourceFileService(jsfApp);
 	}
@@ -44,9 +40,9 @@ public class TestDataSourceFileService extends TestCase {
 		assertThat(dataSourceFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyDataSourceFileService() {
+    Mockito.reset(jsfApp);
 		dataSourceFileService = null;
-		jsfApp = null;
 	}
 }

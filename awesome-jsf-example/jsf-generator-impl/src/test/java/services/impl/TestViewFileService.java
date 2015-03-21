@@ -1,31 +1,27 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.files.impl.ViewFile;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.files.impl.ViewFile;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestViewFileService extends TestCase {
+@Test
+public class TestViewFileService {
 	private ViewFileService viewFileService;
 	@Mock private JSFApp jsfApp;
 	@Mock private ViewFile viewFile;
 
-	@Before
+	@BeforeMethod
 	public void prepareViewFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("MyApp");
 		viewFileService = new ViewFileService(jsfApp, viewFile);
 	}
@@ -73,10 +69,9 @@ public class TestViewFileService extends TestCase {
 		assertThat(viewFileService.getRoot()).contains(entry("view", viewFile));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyViewFileService() {
+    Mockito.reset(jsfApp, viewFile);
 		viewFileService = null;
-		jsfApp = null;
-		viewFile = null;
 	}
 }

@@ -1,34 +1,29 @@
 package cucumber;
 
-import static java.nio.file.FileVisitResult.CONTINUE;
-import static org.fest.assertions.api.Assertions.assertThat;
-import gherkin.deps.com.google.gson.Gson;
-import gherkin.deps.com.google.gson.GsonBuilder;
-import gherkin.deps.com.google.gson.JsonIOException;
-import gherkin.deps.com.google.gson.JsonSyntaxException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.FileVisitResult;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.attribute.BasicFileAttributes;
-
-import junit.framework.TestCase;
-import models.App;
-import models.impl.JSFApp;
 import controllers.GeneratorController;
 import controllers.impl.JSFGeneratorController;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import cucumber.runtime.java.StepDefAnnotation;
+import gherkin.deps.com.google.gson.Gson;
+import gherkin.deps.com.google.gson.GsonBuilder;
+import gherkin.deps.com.google.gson.JsonIOException;
+import gherkin.deps.com.google.gson.JsonSyntaxException;
+import models.App;
+import models.impl.JSFApp;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+
+import static java.nio.file.FileVisitResult.CONTINUE;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @StepDefAnnotation
-public class GeneratorStepDefs extends TestCase {
+public class GeneratorStepDefs {
 	private App app;
 
 	@Given("^that I have parsed \"([^\"]*)\"$")

@@ -1,10 +1,9 @@
 package assertions;
 
-import java.util.List;
-
-import org.fest.assertions.api.AbstractAssert;
-
+import org.assertj.core.api.AbstractAssert;
 import services.FileService;
+
+import java.util.List;
 
 public class FileServiceAssert extends AbstractAssert<FileServiceAssert, List<FileService>> {
 	public FileServiceAssert(List<FileService> actual) {

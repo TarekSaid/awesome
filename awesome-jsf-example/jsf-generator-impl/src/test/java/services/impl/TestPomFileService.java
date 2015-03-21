@@ -1,30 +1,28 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.files.impl.PomFile;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.files.impl.PomFile;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestPomFileService extends TestCase {
+@Test
+public class TestPomFileService {
 	private PomFileService pomFileService;
 	@Mock private JSFApp jsfApp;
 	@Mock private PomFile pomFile;
 
-	@Before
+	@BeforeMethod
 	public void preparePomFileService() {
+    MockitoAnnotations.initMocks(this);
 		pomFileService = new PomFileService(jsfApp);
 	}
 
@@ -49,10 +47,9 @@ public class TestPomFileService extends TestCase {
 		assertThat(pomFileService.getRoot()).contains(entry("pom", pomFile));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyPomFileService() {
+    Mockito.reset(jsfApp, pomFile);
 		pomFileService = null;
-		jsfApp = null;
-		pomFile = null;
 	}
 }

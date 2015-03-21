@@ -1,29 +1,25 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestPersistenceFileService extends TestCase {
+@Test
+public class TestPersistenceFileService {
 	private PersistenceFileService persistenceFileService;
 	@Mock private JSFApp jsfApp;
 
-	@Before
+	@BeforeMethod
 	public void preparePersistenceFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("persistenceTest");
 		persistenceFileService = new PersistenceFileService(jsfApp);
 	}
@@ -44,9 +40,9 @@ public class TestPersistenceFileService extends TestCase {
 		assertThat(persistenceFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyPersistenceFileService() {
+    Mockito.reset(jsfApp);
 		persistenceFileService = null;
-		jsfApp = null;
 	}
 }

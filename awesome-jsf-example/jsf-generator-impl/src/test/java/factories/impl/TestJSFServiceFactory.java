@@ -1,57 +1,37 @@
 package factories.impl;
 
-import static assertions.FileServiceAssert.assertThatMy;
-import static org.fest.assertions.api.Assertions.assertThat;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
-import junit.framework.TestCase;
 import models.files.impl.BeanFile;
 import models.files.impl.ModelFile;
 import models.files.impl.ViewFile;
 import models.impl.JSFApp;
 import models.impl.Model;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.collections.Sets;
-import org.mockito.runners.MockitoJUnitRunner;
-
+import org.testng.annotations.*;
 import services.FileService;
-import services.impl.AbstractDaoFileService;
-import services.impl.BeanFileService;
-import services.impl.CrudFileService;
-import services.impl.CssFileService;
-import services.impl.DaoFileService;
-import services.impl.DaoImplFileService;
-import services.impl.DataSourceFileService;
-import services.impl.DefaultTemplateFileService;
-import services.impl.HeaderTemplateFileService;
-import services.impl.IdFileService;
-import services.impl.JSFFileService;
-import services.impl.MigrationFileService;
-import services.impl.ModelFileService;
-import services.impl.PersistenceFileService;
-import services.impl.PomFileService;
-import services.impl.ViewFileService;
-import services.impl.WebFileService;
+import services.impl.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class TestJSFServiceFactory extends TestCase {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import static assertions.FileServiceAssert.assertThatMy;
+import static org.assertj.core.api.Assertions.assertThat;
+
+@Test
+public class TestJSFServiceFactory {
 	private JSFServiceFactory serviceFactory;
 	@Mock private JSFApp jsfApp;
 	@Mock private Model model;
 	private static final boolean SHOULD_CONTAIN_SERVICE = true;
 	private static final boolean SHOULD_NOT_CONTAIN_SERVICE = false;
 
-	@Before
+	@BeforeMethod
 	public void prepareFactory() {
+    MockitoAnnotations.initMocks(this);
+
 		serviceFactory = new JSFServiceFactory();
 		Mockito.when(model.getName()).thenReturn("test");
 	}
@@ -257,11 +237,10 @@ public class TestJSFServiceFactory extends TestCase {
 		actualServices(SHOULD_NOT_CONTAIN_SERVICE, new CrudFileService(jsfApp));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyFactory() {
+    Mockito.reset(jsfApp, model);
 		serviceFactory = null;
-		jsfApp = null;
-		model = null;
 	}
 
 	private <T extends JSFFileService> void actualServices(boolean shouldContainService, T expectedService) {

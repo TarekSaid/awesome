@@ -1,31 +1,27 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.files.impl.ModelFile;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.files.impl.ModelFile;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestModelFileService extends TestCase {
+@Test
+public class TestModelFileService {
 	private ModelFileService modelFileService;
 	@Mock private JSFApp jsfApp;
 	@Mock private ModelFile modelFile;
 
-	@Before
+	@BeforeMethod
 	public void prepareModelFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("model-test");
 		modelFileService = new ModelFileService(jsfApp, modelFile);
 	}
@@ -52,10 +48,9 @@ public class TestModelFileService extends TestCase {
 		assertThat(modelFileService.getRoot()).contains(entry("model", modelFile));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyModelFileService() {
+    Mockito.reset(jsfApp, modelFile);
 		modelFileService = null;
-		jsfApp = null;
-		modelFile = null;
 	}
 }

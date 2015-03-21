@@ -1,29 +1,27 @@
 package services.impl;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import static org.fest.assertions.api.Assertions.entry;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import junit.framework.TestCase;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.entry;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestAbstractDaoFileService extends TestCase {
+@Test
+public class TestAbstractDaoFileService {
 	private AbstractDaoFileService abstractDaoFileService;
 	@Mock private JSFApp jsfApp;
 
-	@Before
+	@BeforeMethod
 	public void prepareAbstractDaoFileService() {
+    MockitoAnnotations.initMocks(this);
 		Mockito.when(jsfApp.getName()).thenReturn("abstract-dao-test");
 		abstractDaoFileService = new AbstractDaoFileService(jsfApp);
 	}
@@ -44,9 +42,9 @@ public class TestAbstractDaoFileService extends TestCase {
 		assertThat(abstractDaoFileService.getRoot()).contains(entry("app", jsfApp));
 	}
 
-	@After
+	@AfterMethod
 	public void destroyAbstractDaoFileService() {
+    Mockito.reset(jsfApp);
 		abstractDaoFileService = null;
-		jsfApp = null;
 	}
 }

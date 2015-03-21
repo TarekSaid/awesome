@@ -1,36 +1,35 @@
 package controllers.impl;
 
+import factories.ServiceFactory;
+import models.App;
+import models.impl.JSFApp;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import services.FileService;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import junit.framework.TestCase;
-import models.App;
-import models.impl.JSFApp;
+import static org.assertj.core.api.Assertions.fail;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
-
-import services.FileService;
-import controllers.impl.JSFGeneratorController;
-import factories.ServiceFactory;
-
-@RunWith(MockitoJUnitRunner.class)
-public class TestGeneratorControllerImpl extends TestCase {
+@Test
+public class TestGeneratorControllerImpl {
 	private JSFGeneratorController generator;
 	@Mock private ExecutorService executor;
 	@Mock private ServiceFactory serviceFactory;
 	private App app;
 	@Mock private FileService fileService;
 
-	@Before
+	@BeforeMethod
 	public void createGenerator() throws Exception {
+    MockitoAnnotations.initMocks(this);
+
 		generator = new JSFGeneratorController();
 		generator.setServiceFactory(serviceFactory);
 		generator.setExecutor(executor);
@@ -96,11 +95,10 @@ public class TestGeneratorControllerImpl extends TestCase {
 		}
 	}
 
-	@After
+	@AfterMethod
 	public void destroyGenerator() {
+    Mockito.reset(executor, serviceFactory, fileService);
 		generator = null;
-		executor = null;
-		app = null;
-		fileService = null;
+    app = null;
 	}
 }

@@ -1,6 +1,6 @@
-import org.junit.runner.RunWith;
-import cucumber.api.junit.Cucumber;
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
 
-@RunWith(Cucumber.class)
-public class RunTests {
+@CucumberOptions(plugin = "pretty")
+public class RunTests extends AbstractTestNGCucumberTests {
 }

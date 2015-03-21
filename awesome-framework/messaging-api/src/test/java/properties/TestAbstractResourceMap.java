@@ -1,16 +1,13 @@
 package properties;
 
-import static org.fest.assertions.api.Assertions.assertThat;
-import junit.framework.TestCase;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(MockitoJUnitRunner.class)
-public class TestAbstractResourceMap extends TestCase {
+@Test
+public class TestAbstractResourceMap {
 	private class TestResourceMap extends AbstractResourceMap {
 		@Override
 		public void populateProperties() {
@@ -22,7 +19,7 @@ public class TestAbstractResourceMap extends TestCase {
 
 	private AbstractResourceMap resourceMap;
 
-	@Before
+	@BeforeTest
 	public void prepareResourceMap() {
 		resourceMap = new TestResourceMap();
 	}
@@ -38,7 +35,7 @@ public class TestAbstractResourceMap extends TestCase {
 		assertThat(resourceMap.getObject("test3")).isEqualTo(true);
 	}
 
-	@After
+	@AfterTest
 	public void destroyResourceMap() {
 		resourceMap = null;
 	}

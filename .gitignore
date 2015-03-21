@@ -1,0 +1,13 @@
+# ignore Eclipse files
+.settings/
+.classpath
+.project
+
+# ignore Intellij Idea files
+.idea/
+*.iml
+*.iws
+
+# ignore Maven files
+target/
+log/

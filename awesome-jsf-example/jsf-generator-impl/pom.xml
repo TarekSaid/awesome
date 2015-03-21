@@ -15,48 +15,19 @@
   </properties>
 
   <dependencies>
-      <!-- iPojo annotations to configure bundles -->
-      <dependency>
-      <groupId>org.apache.felix</groupId>
-      <artifactId>org.apache.felix.ipojo.annotations</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <!-- Test dependencies -->
-    <!-- Junit -->
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <!-- Fest assertions -->
-    <dependency>
-      <groupId>org.easytesting</groupId>
-      <artifactId>fest-assert-core</artifactId>
-      <optional>true</optional>
-    </dependency>
-
-    <!-- Mockito -->
-    <dependency>
-      <groupId>org.mockito</groupId>
-      <artifactId>mockito-all</artifactId>
-      <optional>true</optional>
-    </dependency>
-
     <!-- Cucumber-JVM -->
     <dependency>
       <groupId>info.cukes</groupId>
       <artifactId>cucumber-java</artifactId>
-      <version>1.1.5</version>
+      <version>1.2.2</version>
       <scope>test</scope>
       <optional>true</optional>
     </dependency>
 
     <dependency>
       <groupId>info.cukes</groupId>
-      <artifactId>cucumber-junit</artifactId>
-      <version>1.1.5</version>
+      <artifactId>cucumber-testng</artifactId>
+      <version>1.2.2</version>
       <scope>test</scope>
       <optional>true</optional>
     </dependency>
